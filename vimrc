@@ -435,6 +435,9 @@
     let g:undotree_TreeNodeShape = '◦'
     nnoremap <silent> <leader>vu :<c-u>if !exists("g:loaded_undotree")<bar>packadd undotree<bar>endif<cr>:UndotreeToggle<cr>
   " }}
+  " Vim-javascript {{
+    let g:javascript_plugin_jsdoc = 1
+  " }}
   " Nerdtree {{
     nnoremap <silent> <leader>vn :<c-u>if !exists("g:loaded_nerdtree")<bar>packadd nerdtree<bar>endif<cr>:NERDTreeToggle<cr>
     " close vim if the only window left open is a NERDTree<Paste>
