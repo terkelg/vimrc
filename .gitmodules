@@ -149,3 +149,7 @@
 	path = pack/bundle/start/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter
 	shallow = true
+[submodule "vim-javascript"]
+	path = pack/bundle/start/vim-javascript
+	url = https://github.com/pangloss/vim-javascript
+	shallow = true
