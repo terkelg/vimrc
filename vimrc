@@ -437,6 +437,8 @@
   " }}
   " Nerdtree {{
     nnoremap <silent> <leader>vn :<c-u>if !exists("g:loaded_nerdtree")<bar>packadd nerdtree<bar>endif<cr>:NERDTreeToggle<cr>
+    " close vim if the only window left open is a NERDTree<Paste>
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
   " }}
   " fzf {{
     " :Files add ! for fullscreen, toggle preview with ?
