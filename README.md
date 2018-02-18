@@ -2,17 +2,13 @@
 
 > My vim configuration
 
-This awesome Vim configuration is a slimmed down version of [lifepillar](https://github.com/lifepillar/vimrc).
-Some features includes:
-
 - Foldable and thoroughly commented `vimrc`.
-- Loads in less than 50ms.
+- Loads pretty fast.
 - Put your customizations into `vimrc_local`.
 - Uses the built-in plugin manager.
 - Move freely between Vim and tmux using `⌥-h/j/k/l`
   (plugin-free, requires [some configuration](https://github.com/lifepillar/dotfiles/blob/master/dot-tmux.conf) in tmux, too).
 - 40-column **cheat sheet** always two keys away (courtesy of [Cheat40](https://github.com/lifepillar/vim-cheat40)).
-- Collapsible, fully customizable, **"plugin-free" status line**.
 
 
 ### Requirements
@@ -81,20 +77,9 @@ To add `Foo` as an optional plugin, change `start` with `opt` (it works if Vim
 has packages, otherwise you also have to add the plugin to
 `g:pathogen_blacklist`).
 
-To add a colorscheme, change `bundle/start` with `themes/opt`.
-
-> You can also use the bash scripts in the vimrc folder, e.g. `./addbundle.sh name http;//repo/whatever.git`
+> To add a colorscheme, change `bundle/start` with `themes/opt`.
 
 
 ### Credit
-Most of this comes from [lifepillar](https://github.com/lifepillar/vimrc). Check it out!
 
-### Useful resources
-
-- [usevim](http://usevim.com/)
-- [VimGolf](http://vimgolf.com)
-- [VimAwesome](http://vimawesome.com)
-- [vimrcfu](http://vimrcfu.com)
-- [vim-galore](https://github.com/mhinz/vim-galore)
-- [vimcolors](http://vimcolors.com)
-
+Based on the [lifepillar](https://github.com/lifepillar/vimrc).
