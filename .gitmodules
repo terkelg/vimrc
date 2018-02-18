@@ -145,3 +145,7 @@
 [submodule "pack/bundle/start/commentary"]
 	path = pack/bundle/start/commentary
 	url = https://github.com/tpope/vim-commentary
+[submodule "vim-gitgutter"]
+	path = pack/bundle/start/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter
+	shallow = true
