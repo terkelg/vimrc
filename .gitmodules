@@ -62,10 +62,6 @@
 	path = pack/bundle/start/vim-peekaboo
 	url = https://github.com/junegunn/vim-peekaboo
 	shallow = true
-[submodule "rainbow_parentheses"]
-	path = pack/bundle/start/rainbow_parentheses
-	url = https://github.com/kien/rainbow_parentheses.vim
-	shallow = true
 [submodule "nerdtree"]
 	path = pack/bundle/opt/nerdtree
 	url = https://github.com/scrooloose/nerdtree
@@ -78,69 +74,6 @@
 	path = pack/bundle/start/commentary
 	url = https://github.com/tpope/vim-commentary
 	shallow = true
-[submodule "pack/bundle/opt/undotree"]
-	path = pack/bundle/opt/undotree
-	url = https://github.com/mbbill/undotree.git
-[submodule "pack/bundle/start/ctrlp"]
-	path = pack/bundle/start/ctrlp
-	url = https://github.com/ctrlpvim/ctrlp.vim.git
-[submodule "pack/bundle/start/surround"]
-	path = pack/bundle/start/surround
-	url = https://github.com/tpope/vim-surround.git
-[submodule "pack/bundle/start/easy-align"]
-	path = pack/bundle/start/easy-align
-	url = https://github.com/junegunn/vim-easy-align.git
-[submodule "pack/bundle/start/repeat"]
-	path = pack/bundle/start/repeat
-	url = https://github.com/tpope/vim-repeat.git
-[submodule "pack/themes/opt/onedark"]
-	path = pack/themes/opt/onedark
-	url = https://github.com/joshdick/onedark.vim
-[submodule "pack/bundle/start/sneak"]
-	path = pack/bundle/start/sneak
-	url = https://github.com/justinmk/vim-sneak.git
-[submodule "pack/themes/opt/wwdc16"]
-	path = pack/themes/opt/wwdc16
-	url = https://github.com/lifepillar/vim-wwdc16-theme.git
-[submodule "pack/bundle/start/cheat40"]
-	path = pack/bundle/start/cheat40
-	url = https://github.com/lifepillar/vim-cheat40.git
-[submodule "pack/bundle/start/mucomplete"]
-	path = pack/bundle/start/mucomplete
-	url = https://github.com/lifepillar/vim-mucomplete.git
-[submodule "pack/bundle/opt/neomake"]
-	path = pack/bundle/opt/neomake
-	url = https://github.com/neomake/neomake
-[submodule "pack/themes/opt/vimone"]
-	path = pack/themes/opt/vimone
-	url = https://github.com/rakr/vim-one
-[submodule "pack/bundle/start/vim-node"]
-	path = pack/bundle/start/vim-node
-	url = https://github.com/moll/vim-node
-[submodule "pack/bundle/start/ultisnips"]
-	path = pack/bundle/start/ultisnips
-	url = https://github.com/SirVer/ultisnips
-[submodule "pack/bundle/start/incbool"]
-	path = pack/bundle/start/incbool
-	url = https://github.com/can3p/incbool.vim
-[submodule "pack/bundle/start/vim-peekaboo"]
-	path = pack/bundle/start/vim-peekaboo
-	url = https://github.com/junegunn/vim-peekaboo
-[submodule "pack/bundle/start/rainbow_parentheses"]
-	path = pack/bundle/start/rainbow_parentheses
-	url = https://github.com/kien/rainbow_parentheses.vim
-[submodule "pack/bundle/start/quick-scope"]
-	path = pack/bundle/start/quick-scope
-	url = https://github.com/unblevable/quick-scope
-[submodule "pack/bundle/opt/nerdtree"]
-	path = pack/bundle/opt/nerdtree
-	url = https://github.com/scrooloose/nerdtree
-[submodule "pack/bundle/start/fzf"]
-	path = pack/bundle/start/fzf
-	url = https://github.com/junegunn/fzf.vim
-[submodule "pack/bundle/start/commentary"]
-	path = pack/bundle/start/commentary
-	url = https://github.com/tpope/vim-commentary
 [submodule "vim-gitgutter"]
 	path = pack/bundle/start/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter
