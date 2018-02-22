@@ -51,6 +51,27 @@ Go to (tmux) right pane  «Alt-l»       N
 Go to (tmux) pane below  «Alt-j»       N
 Go to (tmux) pane above  «Alt-k»       N
 Generate or update tags  :Ctags        N
+NERDTree {{{2
+Toggle NERDTree          \vn           N
+Open in new tab          t             N
+Open in split            i             N
+Open in vsplit           s             N
+Open/close node          o             N
+Recursively open node    O             N
+Close parent of node     x             N
+Close all child nodes    X             N
+Go to root               P             N
+Go to parent             p             N
+Go to first child        K             N
+Go to last child         J             N
+Go to next sibling       «C-j»         N
+Go to prev sibling       «C-k»         N
+Toggle hidden files      I             N
+Make current dir root    C             N
+Refresh cursor dir       r             N
+Refresh current root     R             N
+Change CWD to cursor dir cd            N
+Change tree root to CWD  CD            N
 Options {{{2
 Toggle Paste mode        «f9»          N
 Toggle autocompletion    \oa           N
