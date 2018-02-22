@@ -440,7 +440,7 @@
     let g:javascript_plugin_jsdoc = 1
   " }}
   " Quick-scope {{
-    nnoremap <silent> <leader>qs :<c-u>QuickScopeToggle<cr>
+    nnoremap <silent> <leader>oq :<c-u>QuickScopeToggle<cr>
   " }}
   " Nerdtree {{
     nnoremap <silent> <leader>vn :<c-u>if !exists("g:loaded_nerdtree")<bar>packadd nerdtree<bar>endif<cr>:NERDTreeToggle<cr>

@@ -84,3 +84,4 @@ Toggle line numbers      \on           N
 Toggle rel line numbers  \or           N
 Toggle spell checking    \os           N
 Toggle hard/soft tabs    \ot           N
+Toggle Quick-scope       \oq           N
