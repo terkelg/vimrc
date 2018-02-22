@@ -149,3 +149,7 @@
 	path = pack/bundle/start/vim-javascript
 	url = https://github.com/pangloss/vim-javascript
 	shallow = true
+[submodule "quick-scope"]
+	path = pack/bundle/start/quick-scope
+	url = https://github.com/bradford-smith94/quick-scope
+	shallow = true
