@@ -26,7 +26,7 @@ Recommended:
 
 ```sh
     cd ~
-    git clone --depth 1 https://github.com/lifepillar/vimrc.git .vim
+    git clone --depth 1 https://github.com/terkelg/vimrc.git .vim
     cd .vim
     git checkout -b local
     # We use shallow submodules; --remote makes sure we are able to check them out:
