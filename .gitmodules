@@ -66,10 +66,6 @@
 	path = pack/bundle/start/rainbow_parentheses
 	url = https://github.com/kien/rainbow_parentheses.vim
 	shallow = true
-[submodule "quick-scope"]
-	path = pack/bundle/start/quick-scope
-	url = https://github.com/unblevable/quick-scope
-	shallow = true
 [submodule "nerdtree"]
 	path = pack/bundle/opt/nerdtree
 	url = https://github.com/scrooloose/nerdtree
