@@ -82,4 +82,4 @@ has packages, otherwise you also have to add the plugin to
 
 ### Credit
 
-Based on the [lifepillar](https://github.com/lifepillar/vimrc).
+Based on the amazing work from [lifepillar](https://github.com/lifepillar/vimrc).
