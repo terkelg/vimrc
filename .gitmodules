@@ -86,7 +86,3 @@
 	path = pack/bundle/start/quick-scope
 	url = https://github.com/bradford-smith94/quick-scope
 	shallow = true
-[submodule "rainbow"]
-	path = pack/bundle/opt/rainbow
-	url = https://github.com/luochen1990/rainbow
-	shallow = true
