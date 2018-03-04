@@ -172,6 +172,8 @@
       \ endif
     " Less intrusive swap prompt
     autocmd SwapExists * call lf_file#swap_exists(expand("<afile>"))
+    " Automatically reload vimrc when it's saved
+    autocmd! BufWritePost vimrc so ~/.vimrc"  
   augroup END
 " }}
 " Status line {{
