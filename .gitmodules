@@ -86,7 +86,7 @@
 	path = pack/bundle/start/quick-scope
 	url = https://github.com/bradford-smith94/quick-scope
 	shallow = true
-[submodule "editorconfig"]
-	path = editorconfig-vim
+[submodule "editorconfig-vim"]
+	path = pack/bundle/start/editorconfig-vim
 	url = https://github.com/editorconfig/editorconfig-vim
 	shallow = true
