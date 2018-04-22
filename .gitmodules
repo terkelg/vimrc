@@ -34,10 +34,6 @@
 	path = pack/bundle/start/cheat40
 	url = https://github.com/lifepillar/vim-cheat40.git
 	shallow = false
-[submodule "mucomplete"]
-	path = pack/bundle/start/mucomplete
-	url = https://github.com/lifepillar/vim-mucomplete.git
-	shallow = false
 [submodule "neomake"]
 	path = pack/bundle/opt/neomake
 	url = https://github.com/neomake/neomake
@@ -81,10 +77,6 @@
 [submodule "vim-javascript"]
 	path = pack/bundle/start/vim-javascript
 	url = https://github.com/pangloss/vim-javascript
-	shallow = true
-[submodule "quick-scope"]
-	path = pack/bundle/start/quick-scope
-	url = https://github.com/bradford-smith94/quick-scope
 	shallow = true
 [submodule "editorconfig-vim"]
 	path = pack/bundle/start/editorconfig-vim

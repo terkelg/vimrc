@@ -423,10 +423,6 @@
     xmap <leader>ea <plug>(EasyAlign)
     nmap <leader>ea <plug>(EasyAlign)
   " }}
-  " MUcomplete {{
-    let g:mucomplete#enable_auto_at_startup = 1
-    nnoremap <silent> <leader>oa :<c-u>MUcompleteAutoToggle<cr>
-  " }}
   " Sneak {{
     let g:sneak#label = 1
     let g:sneak#use_ic_scs = 1 " Match according to ignorecase and smartcase
