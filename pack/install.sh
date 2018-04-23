@@ -81,7 +81,6 @@ package https://github.com/tpope/vim-commentary.git &
 package https://github.com/tpope/vim-sleuth.git &
 
 package https://github.com/autozimu/LanguageClient-neovim "./install.sh" &
-# package https://github.com/lifepillar/vim-mucomplete &
 wait
 ) &
 

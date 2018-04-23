@@ -51,6 +51,10 @@ Go to (tmux) right pane  «Alt-l»       N
 Go to (tmux) pane below  «Alt-j»       N
 Go to (tmux) pane above  «Alt-k»       N
 Generate or update tags  :Ctags        N
+LanguageClient {{{2
+Go to definition         gd            N
+Rename item under cursor rn            N
+Call hover info          K             N
 NERDTree {{{2
 Toggle NERDTree          \vn           N
 Open in new tab          t             N

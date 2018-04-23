@@ -117,8 +117,7 @@
   set keywordprg=:help " Get help for word under cursor by pressing K
   set complete+=i      " Use included files for completion
   set complete+=kspell " Use spell dictionary for completion, if available
-  set completeopt+=menuone,noselect
-  set completeopt-=preview
+  set completeopt=menuone,noselect
   set tags=./tags;,tags " Search upwards for tags by default
   " Files and directories to ignore
   set wildignore+=.DS_Store,Icon\?,*.dmg,*.git,*.pyc,*.o,*.obj,*.so,*.swp,*.zip
@@ -173,7 +172,7 @@
     " Less intrusive swap prompt
     autocmd SwapExists * call lf_file#swap_exists(expand("<afile>"))
     " Automatically reload vimrc when it's saved
-    autocmd! BufWritePost vimrc so ~/.vimrc"  
+    " autocmd! BufWritePost vimrc so ~/.vimrc"  
   augroup END
 " }}
 " Status line {{
@@ -445,6 +444,11 @@
     " close vim if the only window left open is a NERDTree<Paste>
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
   " }}
+  " MUcomplete {{
+    nnoremap <silent> <leader>oa :<c-u>MUcompleteAutoToggle<cr>
+    imap <expr> <up> pumvisible() ? "\<plug>(MUcompleteExtendBwd)" : "\<up>"
+    imap <expr> <down> pumvisible() ? "\<plug>(MUcompleteExtendFwd)" : "\<down>"
+  " }}
   " LanguageClient {{
     let g:LanguageClient_serverCommands = {
           \ 'javascript': ['javascript-typescript-stdio'],
@@ -453,6 +457,8 @@
     nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
     nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
     nnoremap <silent> rn :call LanguageClient#textDocument_rename()<CR>
+    set completefunc=LanguageClient#complete 
+    set formatexpr=LanguageClient_textDocument_rangeFormatting()
   " }}
   " fzf {{
     " :Files add ! for fullscreen, toggle preview with ?
