@@ -9,3 +9,5 @@ set directory=~/.vim/tmp/swap
 if !has('nvim')
   set viminfo+=n~/.vim/viminfo
 endif
+" set signcolumn=yes
+
