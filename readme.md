@@ -26,13 +26,11 @@ Recommended:
 
 ```sh
     cd ~
-    git clone --depth 1 https://github.com/terkelg/vimrc.git .vim
+    git clone https://github.com/terkelg/vimrc.git .vim
     cd .vim
     git checkout -b local
-    # We use shallow submodules; --remote makes sure we are able to check them out:
-    git submodule update --init --remote
-    # Commit changes (needed only if there are changes):
-    git commit -a -m "Git submodule update --remote."
+    # install/update plugins
+    ./pack/install.sh
 ```
 
 
@@ -42,10 +40,7 @@ Recommended:
     cd ~/.vim
     git checkout master
     git pull origin master
-    git submodule sync
-    git submodule update --init --recursive
-    git checkout local
-    git rebase master
+    ./pack/install.sh
 ```
 
 …and fix conflicts.
@@ -56,26 +51,17 @@ Recommended:
 Make sure the repo is in a clean state.
 
 ```sh
-    git submodule update --remote --depth 1
-    git commit -a
-    git submodule update --recursive # Optional, only if there are plugins with submodules
+    ./pack/install.sh
 ```
 
 
 ### How to add a new plugin or colorscheme
 
-To add a plugin `Foo` from `https://repo/foo.git`:
+To add a plugin edit the `pack/install.sh` file and run it
 
 ```sh
-    git submodule add --name foo --depth 1 https://repo/foo.git pack/bundle/start/foo
-    git config -f .gitmodules submodule.foo.shallow true
-    git add .gitmodules
-    git commit
+  ./pack/install.sh
 ```
-
-To add `Foo` as an optional plugin, change `start` with `opt` (it works if Vim
-has packages, otherwise you also have to add the plugin to
-`g:pathogen_blacklist`).
 
 > To add a colorscheme, change `bundle/start` with `themes/opt`.
 
