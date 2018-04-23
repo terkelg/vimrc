@@ -445,6 +445,15 @@
     " close vim if the only window left open is a NERDTree<Paste>
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
   " }}
+  " LanguageClient {{
+    let g:LanguageClient_serverCommands = {
+          \ 'javascript': ['javascript-typescript-stdio'],
+          \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+          \ }
+    nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+    nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+    nnoremap <silent> rn :call LanguageClient#textDocument_rename()<CR>
+  " }}
   " fzf {{
     " :Files add ! for fullscreen, toggle preview with ?
     command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, <bang>0 ? fzf#vim#with_preview('right:50%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)

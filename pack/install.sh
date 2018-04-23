@@ -10,7 +10,7 @@
 #
 function set_group () {
   package_group=$1
-  path="$HOME/.vim/pack/$package_group/start"
+  path="$HOME/.vim/pack/$package_group"
   mkdir -p "$path"
   cd "$path" || exit
 }
@@ -25,9 +25,12 @@ function set_group () {
 #
 function package () {
   repo_url=$1
-  if [[ "$repo_url" != http* ]]; then |
+  run_cmd=$2
+
+  if [[ "$repo_url" != http* ]]; then
     repo_url="https://github.com/${repo_url}"
   fi
+
   expected_repo=$(basename "$repo_url" .git)
   if [ -d "$expected_repo" ]; then
     cd "$expected_repo" || exit
@@ -36,6 +39,11 @@ function package () {
   else
     echo "$expected_repo: Installing..."
     git clone -q "$repo_url" --depth 1
+  fi
+
+  if [ ! -z "$run_cmd" ]; then
+    echo "$expected_repo: Running post cmd..."
+    eval $run_cmd
   fi
 }
 
@@ -61,18 +69,19 @@ package https://github.com/moll/vim-node &
 package https://github.com/pangloss/vim-javascript &
 package https://github.com/unblevable/quick-scope &
 
-https://github.com/junegunn/vim-peekaboo &
-https://github.com/junegunn/fzf.vim &
-https://github.com/airblade/vim-gitgutter &
-https://github.com/lifepillar/vim-cheat40.git &
+package https://github.com/junegunn/vim-peekaboo &
+package https://github.com/junegunn/fzf.vim &
+package https://github.com/airblade/vim-gitgutter &
+package https://github.com/lifepillar/vim-cheat40.git &
 
-# tpope
 package https://github.com/tpope/vim-fugitive.git &
 package https://github.com/tpope/vim-surround.git &
 package https://github.com/tpope/vim-repeat.git &
 package https://github.com/tpope/vim-commentary.git &
-# Automatically adjusts 'shiftwidth' and 'expandtab' heuristically based on the current file
 package https://github.com/tpope/vim-sleuth.git &
+
+package https://github.com/autozimu/LanguageClient-neovim "./install.sh" &
+# package https://github.com/lifepillar/vim-mucomplete &
 wait
 ) &
 
@@ -85,19 +94,12 @@ package https://github.com/rakr/vim-one &
 wait
 ) &
 
-
-#(
-#set_group staging
-#package https://github.com/w0rp/ale.git &
-#wait
-#) &
-
 wait
 
 # Generate help docs
 # vim +":helptags ~/.vim/pack" +":qa"
 
-old_plugs=$(find ./*/*/*/.git -prune -mmin +5 -print | sed "s/\/.git//")
+old_plugs=$(find ./*/*/*/*/.git -prune -mmin +5 -print | sed "s/\/.git//")
 if [ -n "$old_plugs" ]; then
   echo "Removing old plugins:"
   echo $old_plugs | xargs rm -rf
