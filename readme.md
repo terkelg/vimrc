@@ -60,4 +60,5 @@ To add a plugin edit the `pack/install.sh` file and run it
 
 ### Credit
 
-Based on the amazing work from [lifepillar](https://github.com/lifepillar/vimrc).
+- Based on the amazing work from [lifepillar](https://github.com/lifepillar/vimrc).
+- [Plugin Script](https://stories.abletech.nz/get-rid-of-your-vim-plugin-manager-7c8ff742f643)
