@@ -10,7 +10,6 @@
   (plugin-free, requires [some configuration](https://github.com/lifepillar/dotfiles/blob/master/dot-tmux.conf) in tmux, too).
 - 40-column **cheat sheet** always two keys away (courtesy of [Cheat40](https://github.com/lifepillar/vim-cheat40)).
 
-
 ### Requirements
 
 - A fairly recent Vim (7.4 or later) (`brew install vim` recommended on macOS).
@@ -20,7 +19,6 @@ Recommended:
 - Vim 8.
 - [fzf](https://github.com/junegunn/fzf) (only the executable);
 - [ripgrep](https://github.com/BurntSushi/ripgrep).
-
 
 ### Installation
 
@@ -33,7 +31,6 @@ Recommended:
     ./pack/install.sh
 ```
 
-
 ### Update
 
 ```sh
@@ -45,7 +42,6 @@ Recommended:
 
 …and fix conflicts.
 
-
 ### Update plugins and colorschemes
 
 Make sure the repo is in a clean state.
@@ -54,7 +50,6 @@ Make sure the repo is in a clean state.
     ./pack/install.sh
 ```
 
-
 ### How to add a new plugin or colorscheme
 
 To add a plugin edit the `pack/install.sh` file and run it
@@ -62,9 +57,6 @@ To add a plugin edit the `pack/install.sh` file and run it
 ```sh
   ./pack/install.sh
 ```
-
-> To add a colorscheme, change `bundle/start` with `themes/opt`.
-
 
 ### Credit
 
