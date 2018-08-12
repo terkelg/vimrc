@@ -188,47 +188,54 @@
     noremap <c-l> <c-w><c-l>
     noremap <c-h> <c-w><c-h>
   " }}
-  " Allow using alt in macOS without enabling “Use Option as Meta key”
-  nmap ¬ <a-l>
-  nmap ˙ <a-h>
-  nmap ∆ <a-j>
-  nmap ˚ <a-k>
-  " Allow saving of files as sudo when I forgot to start vim using sudo.
-  cmap w!! %!sudo tee > /dev/null %
-  " Easier copy/pasting to/from OS clipboard
-  nnoremap <leader>y "*y
-  vnoremap <leader>y "*y
-  nnoremap <leader>Y "*Y
-  nnoremap <leader>p "*p
-  vnoremap <leader>p "*p
-  nnoremap <leader>P "*P
-  vnoremap <leader>P "*P
-  " Use Alt+arrows to jump between words
-  if has('terminal')
-    tnoremap <s-left> <esc>b
-    tnoremap <s-right> <esc>f
-  endif
-  " Buffers
-  nnoremap          <leader>bb :<c-u>ls<cr>:b<space>
-  " Files
-  nnoremap          <leader>ff :<c-u>Files<cr>
-  nnoremap          <leader>fa :<c-u>FilesAll<cr>
-  nnoremap          <leader>fi :<c-u>FilesIn<cr>
-  nnoremap <silent> <leader>fw :<c-u>update<cr>
-  nnoremap <silent> <leader>w  :<c-u>update<cr>
-  nnoremap          <leader>fW :<c-u>w !sudo tee % >/dev/null<cr>
-  " Options
-  nnoremap <silent> <leader>oc :<c-u>setlocal cursorline!<cr>
-  nnoremap <silent> <leader>oh :<c-u>set hlsearch! \| set hlsearch?<cr>
-  nnoremap <silent> <leader>oi :<c-u>set ignorecase! \| set ignorecase?<cr>
-  nnoremap <silent> <leader>ok :<c-u>let &l:scrolloff = (&l:scrolloff == 999) ? g:default_scrolloff : 999<cr>
-  nnoremap <silent> <leader>ol :<c-u>setlocal list!<cr>
-  nnoremap <silent> <leader>on :<c-u>setlocal number!<cr>
-  nnoremap <silent> <leader>or :<c-u>setlocal relativenumber!<cr>
-  nnoremap <silent> <leader>os :<c-u>setlocal spell! \| set spell?<cr>
-  nnoremap <silent> <leader>ot :<c-u>setlocal expandtab!<cr>
-  " View/toggle
-  nnoremap <silent> <leader>vm :<c-u>marks<cr>
+  " Allow using alt in macOS without enabling “Use Option as Meta key” {{
+    nmap ¬ <a-l>
+    nmap ˙ <a-h>
+    nmap ∆ <a-j>
+    nmap ˚ <a-k>
+  " }}
+  " Easier copy/pasting to/from OS clipboard {{
+    nnoremap <leader>y "*y
+    vnoremap <leader>y "*y
+    nnoremap <leader>Y "*Y
+    nnoremap <leader>p "*p
+    vnoremap <leader>p "*p
+    nnoremap <leader>P "*P
+    vnoremap <leader>P "*P
+  " }}
+  " Use Alt+arrows to jump between words {{
+    if has('terminal')
+      tnoremap <s-left> <esc>b
+      tnoremap <s-right> <esc>f
+    endif
+  " }}
+  " Buffers {{
+    nnoremap          <leader>bb :<c-u>ls<cr>:b<space>
+    nnoremap          <leader>bf :<c-u>Buffers<cr>
+  " }}
+  " Files {{
+    nnoremap          <leader>ff :<c-u>Files<cr>
+    nnoremap          <leader>fh :<c-u>FilesHidden<cr>
+    nnoremap          <leader>fi :<c-u>FilesInside<cr>
+    nnoremap          <leader>fl :<c-u>Lines<cr>
+    nnoremap <silent> <leader>fw :<c-u>update<cr>
+    nnoremap <silent> <leader>w  :<c-u>update<cr>
+    nnoremap          <leader>fW :<c-u>w !sudo tee % >/dev/null<cr>
+  " }}
+  " Options {{
+    nnoremap <silent> <leader>oc :<c-u>setlocal cursorline!<cr>
+    nnoremap <silent> <leader>oh :<c-u>set hlsearch! \| set hlsearch?<cr>
+    nnoremap <silent> <leader>oi :<c-u>set ignorecase! \| set ignorecase?<cr>
+    nnoremap <silent> <leader>ok :<c-u>let &l:scrolloff = (&l:scrolloff == 999) ? g:default_scrolloff : 999<cr>
+    nnoremap <silent> <leader>ol :<c-u>setlocal list!<cr>
+    nnoremap <silent> <leader>on :<c-u>setlocal number!<cr>
+    nnoremap <silent> <leader>or :<c-u>setlocal relativenumber!<cr>
+    nnoremap <silent> <leader>os :<c-u>setlocal spell! \| set spell?<cr>
+    nnoremap <silent> <leader>ot :<c-u>setlocal expandtab!<cr>
+  " }}
+  " View/toggle {{
+    nnoremap <silent> <leader>vm :<c-u>marks<cr>
+  " }}
 " }}
 " GUI {{
   if has('gui_running')
@@ -303,13 +310,14 @@
     " :Files add ! for fullscreen, toggle preview with ?
     command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, <bang>0 ? fzf#vim#with_preview('right:50%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
     " Like files, but including hidden files - overwrite default fzf command that don't include hidden files
-    command! -bang -nargs=* -complete=dir FilesAll call fzf#run(fzf#wrap({
+    command! -bang -nargs=* -complete=dir FilesHidden call fzf#run(fzf#wrap({
           \ 'source': 'rg --files --hidden --no-ignore --follow --ignore-case'}, <bang>0))
     " Serch in files with rg - https://medium.com/@crashybang/supercharge-vim-with-fzf-and-ripgrep-d4661fc853d2
     let g:files_command = '
           \ rg --column --line-number --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
           \ -g "!{.git,node_modules,build,yarn.lock,dist}/*" '
-    command! -bang -nargs=* FilesIn call fzf#vim#grep(g:files_command .shellescape(<q-args>), 1, <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%', '?'), <bang>0)
+    command! -bang -nargs=* FilesInside call fzf#vim#grep(g:files_command .shellescape(<q-args>), 1, <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%', '?'), <bang>0)
+    nnoremap          <leader>fz :<c-u>FZF<cr>
   " }}
 " }}
 " Themes {{

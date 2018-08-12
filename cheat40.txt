@@ -3,6 +3,7 @@ FZF {{{2
 Search files             :FZF …        N
 Git status files         :GFiles …     N
 Commits                  :Commits …    N
+Buffers                  :Buffers …    N
 CtrlP {{{2
 Open in buffer mode      «C-p»         N
 Easy Align {{{2
@@ -42,8 +43,10 @@ Add blank line below     ]«Spc»        N
 Remove trailing space    \es           N
 Search {{{2
 Find file in working dir \ff           N
-Ditto including dotfiles \fa           N
+Ditto including dotfiles \fh           N
 Find in files (rg)       \fi           N
+Find with FZF            \fz           N
+Find buffers             \bf           N
 Go {{{2
 Go to window number n    \‹n›          N
 Go to (tmux) left pane   «Alt-h»       N
