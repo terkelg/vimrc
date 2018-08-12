@@ -1,11 +1,11 @@
 ## Vimrc
 
-> My vim configuration
+> My sweet sweet vim configuration
 
 - Foldable and thoroughly commented `vimrc`.
-- Loads pretty fast.
+- Loads okay fast.
 - Put your customizations into `vimrc_local`.
-- Uses the built-in plugin manager.
+- Uses the built-in vim plugin manager.
 - Move freely between Vim and tmux using `⌥-h/j/k/l`
   (plugin-free, requires [some configuration](https://github.com/lifepillar/dotfiles/blob/master/dot-tmux.conf) in tmux, too).
 - 40-column **cheat sheet** always two keys away (courtesy of [Cheat40](https://github.com/lifepillar/vim-cheat40)).
@@ -40,8 +40,6 @@ Recommended:
     ./pack/install.sh
 ```
 
-…and fix conflicts.
-
 ### Update plugins and colorschemes
 
 Make sure the repo is in a clean state.
@@ -61,4 +59,5 @@ To add a plugin edit the `pack/install.sh` file and run it
 ### Credit
 
 - Based on the amazing work from [lifepillar](https://github.com/lifepillar/vimrc).
+- With inspiration from [yoshuawuyts](https://github.com/yoshuawuyts/dotfiles/blob/master/vim/vimrc)
 - [Plugin Script](https://stories.abletech.nz/get-rid-of-your-vim-plugin-manager-7c8ff742f643)

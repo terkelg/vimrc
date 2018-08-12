@@ -26,6 +26,7 @@ function set_group () {
 function package () {
   repo_url=$1
   run_cmd=$2
+  custom_dir=$3
 
   if [[ "$repo_url" != http* ]]; then
     repo_url="https://github.com/${repo_url}"
@@ -38,7 +39,10 @@ function package () {
     echo "$expected_repo: $result"
   else
     echo "$expected_repo: Installing..."
-    git clone -q "$repo_url" --depth 1
+    if [ -d $custom_dir ]; then
+      cd $custom_dir
+    fi
+    git clone -q "$repo_url" "$path/$expected_repo" --depth 1
   fi
 
   if [ ! -z "$run_cmd" ]; then
@@ -59,8 +63,6 @@ wait
 # Start-up plugins
 (
 set_group bundle/start
-# package https://github.com/w0rp/ale.git &
-package https://github.com/junegunn/vim-easy-align.git &
 package https://github.com/justinmk/vim-sneak.git &
 package https://github.com/SirVer/ultisnips &
 package https://github.com/can3p/incbool.vim &
@@ -69,8 +71,11 @@ package https://github.com/moll/vim-node &
 package https://github.com/pangloss/vim-javascript &
 package https://github.com/unblevable/quick-scope &
 
+#package https://github.com/itchyny/lightline.vim &
 package https://github.com/junegunn/vim-peekaboo &
+package https://github.com/junegunn/fzf "./install --all" "~/.fzf" &
 package https://github.com/junegunn/fzf.vim &
+
 package https://github.com/airblade/vim-gitgutter &
 package https://github.com/lifepillar/vim-cheat40.git &
 
@@ -78,7 +83,7 @@ package https://github.com/tpope/vim-fugitive.git &
 package https://github.com/tpope/vim-surround.git &
 package https://github.com/tpope/vim-repeat.git &
 package https://github.com/tpope/vim-commentary.git &
-package https://github.com/tpope/vim-sleuth.git &
+#package https://github.com/tpope/vim-sleuth.git &
 
 package https://github.com/autozimu/LanguageClient-neovim "./install.sh" &
 wait
@@ -88,7 +93,6 @@ wait
 (
 set_group themes/opt
 package https://github.com/joshdick/onedark.vim &
-package https://github.com/lifepillar/vim-wwdc16-theme.git &
 package https://github.com/rakr/vim-one & 
 wait
 ) &
