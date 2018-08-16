@@ -188,6 +188,17 @@
     noremap <c-l> <c-w><c-l>
     noremap <c-h> <c-w><c-h>
   " }}
+  " Square bracket mappings (many of them inspired by Unimpaired) {{
+    nnoremap <silent> [<space> :<c-u>put!=repeat(nr2char(10),v:count1)<cr>']+1
+    nnoremap <silent> ]<space> :<c-u>put=repeat(nr2char(10),v:count1)<cr>'[-1
+    nnoremap <silent> <leader>bn :<c-u>enew<cr>
+    nnoremap <silent> [a :<c-u><c-r>=v:count1<cr>prev<cr>
+    nnoremap <silent> ]a :<c-u><c-r>=v:count1<cr>next<cr>
+    nnoremap <silent> ]b :<c-u><c-r>=v:count1<cr>bn<cr>
+    nnoremap <silent> [b :<c-u><c-r>=v:count1<cr>bp<cr>
+    nnoremap <silent> ]l :<c-u><c-r>=v:count1<cr>lnext<cr>zz
+    nnoremap <silent> [l :<c-u><c-r>=v:count1<cr>lprevious<cr>zz
+  " }}
   " Allow using alt in macOS without enabling “Use Option as Meta key” {{
     nmap ¬ <a-l>
     nmap ˙ <a-h>
@@ -211,7 +222,10 @@
   " }}
   " Buffers {{
     nnoremap          <leader>bb :<c-u>ls<cr>:b<space>
+    nnoremap <silent> <leader>bn :<c-u>enew<cr>
     nnoremap          <leader>bf :<c-u>Buffers<cr>
+    nnoremap <silent> <leader>bw :<c-u>bw<cr>
+    nnoremap <silent> <leader>bW :<c-u>bw!<cr>
   " }}
   " Files {{
     nnoremap          <leader>ff :<c-u>Files<cr>

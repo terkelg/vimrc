@@ -53,6 +53,12 @@ Go to (tmux) left pane   «Alt-h»       N
 Go to (tmux) right pane  «Alt-l»       N
 Go to (tmux) pane below  «Alt-j»       N
 Go to (tmux) pane above  «Alt-k»       N
+Edit prev in arg list    [a            N
+Edit next in arg list    ]a            N
+Edit next file (:bn)     [b            N
+Edit prev file (:bp)     ]b            N
+Prev in location list    [l            N
+Next in location list    ]l            N
 Generate or update tags  :Ctags        N
 LanguageClient {{{2
 Go to definition         gd            N
