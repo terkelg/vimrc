@@ -70,6 +70,7 @@ package https://github.com/editorconfig/editorconfig-vim &
 package https://github.com/moll/vim-node &
 package https://github.com/pangloss/vim-javascript &
 package https://github.com/unblevable/quick-scope &
+package https://github.com/yardnsm/vim-import-cost "npm install" &
 
 #package https://github.com/itchyny/lightline.vim &
 package https://github.com/junegunn/vim-peekaboo &
