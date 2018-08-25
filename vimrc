@@ -20,6 +20,36 @@
   set ttimeout
   set ttimeoutlen=10  " This must be a low value for <esc>-key not to be confused with an <a-…> mapping
 " }}
+" Install Plugins {{
+  call plug#begin('~/.vim/plugged')
+  Plug 'lifepillar/vim-cheat40'                " Cheat sheet for Vim
+  Plug 'justinmk/vim-sneak'                    " Jump to any location specified by two characters
+  Plug 'airblade/vim-gitgutter'                " Show git status in the sidebar
+  Plug 'unblevable/quick-scope'                " Highlight characters to target for f, F
+  Plug 'can3p/incbool.vim'                     " Increment not only numbers but also true/false, show/hide etc.
+  Plug 'moll/vim-node'                         " Enable gf to open node modules
+  Plug 'scrooloose/nerdtree'                   " File browser
+  Plug 'tpope/vim-commentary'                  " Add comments in blocks
+  Plug 'tpope/vim-surround'                    " Enable inserting brackets around words
+  Plug 'sheerun/vim-polyglot'                  " Syntax highlighting for more languages
+  Plug 'joshdick/onedark.vim'                  " Nice theme      
+  Plug 'rakr/vim-one'                          " Another nice theme
+  Plug 'junegunn/vim-peekaboo'                 " See the contents of registers
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fuzzy finder <3
+  Plug 'junegunn/fzf.vim'
+  Plug 'autozimu/LanguageClient-neovim', {
+        \ 'branch': 'next',
+        \ 'do': 'bash install.sh',
+        \ }
+  if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+  endif
+  call plug#end()
+" }}
 " History and Backup {{
   " Consolidate temporary files in a central spot
   set backupdir=~/.vim/tmp/backup
@@ -88,6 +118,7 @@
     let &t_8f = "\<esc>[38;2;%lu;%lu;%lum" " Needed in tmux
     let &t_8b = "\<esc>[48;2;%lu;%lu;%lum" " Ditto
     set termguicolors
+    set background=dark " 
   endif
   set termguicolors 
   set display=lastline " prevent @ symbol on when lines doesn't fit 
@@ -301,24 +332,24 @@
     nnoremap <silent> <leader>oq :<c-u>QuickScopeToggle<cr>
   " }}
   " Nerdtree {{
-    nnoremap <silent> <leader>vn :<c-u>if !exists("g:loaded_nerdtree")<bar>packadd nerdtree<bar>endif<cr>:NERDTreeToggle<cr>
+    " nnoremap <silent> <leader>vn :<c-u>if !exists("g:loaded_nerdtree")<bar>packadd nerdtree<bar>endif<cr>:NERDTreeToggle<cr>
+    nnoremap <silent> <leader>vn :NERDTreeToggle<CR>
     " close vim if the only window left open is a NERDTree<Paste>
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
   " }}
-  " MUcomplete {{
-    nnoremap <silent> <leader>oa :<c-u>MUcompleteAutoToggle<cr>
-    imap <expr> <up> pumvisible() ? "\<plug>(MUcompleteExtendBwd)" : "\<up>"
-    imap <expr> <down> pumvisible() ? "\<plug>(MUcompleteExtendFwd)" : "\<down>"
+  " Deoplete {{
+  let g:deoplete#enable_at_startup = 1
+  inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
   " }}
   " LanguageClient {{
     let g:LanguageClient_diagnosticsEnable = 0
     let g:LanguageClient_serverCommands = {
-          \ 'javascript': ['javascript-typescript-stdio'],
-          \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+          \ 'javascript': ['javascript-typescript-stdio']
           \ }
     nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
     nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <silent> rn :call LanguageClient#textDocument_rename()<CR>
+    nnoremap <silent> R :call LanguageClient#textDocument_rename()<CR>
   " }}
   " fzf {{
     " :Files add ! for fullscreen, toggle preview with ?
