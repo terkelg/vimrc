@@ -178,10 +178,10 @@
       nnoremap <a-k> <c-w>k
     endif
     " Disable arrow movement, resize splits instead
-          nnoremap <Up>    :resize +2<CR>
-          nnoremap <Down>  :resize -2<CR>
-          nnoremap <Left>  :vertical resize +2<CR>
-          nnoremap <Right> :vertical resize -2<CR>
+    nnoremap <Up>    :resize +2<CR>
+    nnoremap <Down>  :resize -2<CR>
+    nnoremap <Left>  :vertical resize +2<CR>
+    nnoremap <Right> :vertical resize -2<CR>
     " Faster split navigation
     noremap <c-j> <c-w><c-j>
     noremap <c-k> <c-w><c-k>
