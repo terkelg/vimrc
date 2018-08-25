@@ -8,3 +8,5 @@
 /vimrc_local
 /pack/bundle
 /pack/themes
+/autoload/plug.vim
+/plugged
