@@ -128,7 +128,7 @@
   set number " Turn line numbering on
   set relativenumber " Display line numbers relative to the line with the cursor
   set laststatus=2 " Always show status line
-  set cmdheight=2 " Increase space for command line
+  set cmdheight=1 " Increase space for command line
   set shortmess+=Icm " No intro, suppress ins-completion messages, use [+] instead of [Modified]
   set showcmd " Show (partial) command in the last line of the screen
   set diffopt+=vertical " Diff in vertical mode
@@ -309,11 +309,6 @@
     xmap <leader>ea <plug>(EasyAlign)
     nmap <leader>ea <plug>(EasyAlign)
   " }}
-  " Lightline {{
-    let g:lightline = {
-      \ 'colorscheme': 'onedark',
-      \ }
-  " }}
   " Sneak {{
     let g:sneak#label = 1
     let g:sneak#use_ic_scs = 1 " Match according to ignorecase and smartcase
@@ -345,7 +340,8 @@
   " LanguageClient {{
     let g:LanguageClient_diagnosticsEnable = 0
     let g:LanguageClient_serverCommands = {
-          \ 'javascript': ['javascript-typescript-stdio']
+          \ 'javascript': ['javascript-typescript-stdio'],
+          \ 'javascript.jsx': ['javascript-typescript-stdio']
           \ }
     nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
     nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
