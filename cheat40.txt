@@ -62,7 +62,7 @@ Next in location list    ]l            N
 Generate or update tags  :Ctags        N
 LanguageClient {{{2
 Go to definition         gd            N
-Rename item under cursor rn            N
+Rename item under cursor R             N
 Call hover info          K             N
 NERDTree {{{2
 Toggle NERDTree          \vn           N
