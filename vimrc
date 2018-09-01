@@ -31,6 +31,7 @@
   Plug 'scrooloose/nerdtree'                   " File browser
   Plug 'tpope/vim-commentary'                  " Add comments in blocks
   Plug 'tpope/vim-surround'                    " Enable inserting brackets around words
+  Plug 'tpope/vim-sleuth'                      " Automatically adjusts 'shiftwidth' and 'expandtab'
   Plug 'sheerun/vim-polyglot'                  " Syntax highlighting for more languages
   Plug 'joshdick/onedark.vim'                  " Nice theme      
   Plug 'rakr/vim-one'                          " Another nice theme
@@ -147,20 +148,31 @@
 " Autocommands {{
   augroup lf_autocmds
     autocmd!
+
     " Resize windows when the terminal window size changes (from http://vimrcfu.com/snippet/186)
     autocmd VimResized * wincmd =
+
     " If a file is large, disable syntax highlighting and other stuff
     autocmd BufReadPre * let s = getfsize(expand("<afile>")) | if s > g:LargeFile || s == -2 | call lf_buffer#large(expand("<afile>")) | endif
+
     " On opening a file, jump to the last known cursor position (see :h line())
     autocmd BufReadPost *
       \ if line("'\"") > 1 && line("'\"") <= line("$") && &ft !~# 'commit' |
       \   exe "normal! g`\"" |
       \ endif
+
     " Less intrusive swap prompt
     autocmd SwapExists * call lf_file#swap_exists(expand("<afile>"))
+
+    " Don't auto insert a comment when using O/o for a newline
+    autocmd VimEnter,BufRead,FileType * set formatoptions-=o
+
     " Automatically reload vimrc when it's saved
-    " autocmd! BufWritePost vimrc so ~/.vimrc"  " Automatically reload vimrc when it's saved
-    autocmd FocusGained * :checktime " Automatically reload files when changed
+    autocmd! BufWritePost vimrc so ~/.vim/vimrc"
+
+    " Automatically reload files when changed
+    autocmd FocusGained * :checktime 
+
   augroup END
 " }}
 " Helper functions {{
@@ -182,6 +194,8 @@
 " Key mappings (plugins excluded) {{
   " Use space as alternative leader
   map <space> <leader>
+  " Move to last edit location and put it in the center of the screen
+  nnoremap <C-o> <C-o>zz
   " Utilities {{
     " Change to the directory of the current file
     nnoremap <silent> cd :<c-u>cd %:h \| pwd<cr>
