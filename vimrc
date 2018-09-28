@@ -119,7 +119,7 @@
     let &t_8f = "\<esc>[38;2;%lu;%lu;%lum" " Needed in tmux
     let &t_8b = "\<esc>[48;2;%lu;%lu;%lum" " Ditto
     set termguicolors
-    set background=dark " 
+    set background=dark
   endif
   set termguicolors 
   set display=lastline " prevent @ symbol on when lines doesn't fit 
@@ -391,7 +391,6 @@
   if filereadable(s:vimrc_local)
     execute 'source' s:vimrc_local
   else
-    "packadd! onedark.vim
     colorscheme one
   endif
 " }}
