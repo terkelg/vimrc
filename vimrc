@@ -38,17 +38,17 @@
   Plug 'junegunn/vim-peekaboo'                 " See the contents of registers
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fuzzy finder <3
   Plug 'junegunn/fzf.vim'
+
+  Plug 'roxma/nvim-yarp'                       " A dependency of 'ncm2'.
+  Plug 'ncm2/ncm2'                             " Auto complete
+  Plug 'ncm2/ncm2-bufword'
+  Plug 'ncm2/ncm2-tmux'
+  Plug 'ncm2/ncm2-path'
+
   Plug 'autozimu/LanguageClient-neovim', {
         \ 'branch': 'next',
         \ 'do': 'bash install.sh',
         \ }
-  if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-  endif
   call plug#end()
 " }}
 " History and Backup {{
@@ -346,10 +346,13 @@
     " close vim if the only window left open is a NERDTree<Paste>
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
   " }}
-  " Deoplete {{
-  let g:deoplete#enable_at_startup = 1
-  inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  " NCM2 {{
+    autocmd BufEnter  *  call ncm2#enable_for_buffer() 
+    " Use this mapping to close the menu and also start a new line on enter
+    inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+    " Use <TAB> to select the popup menu
+    inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
   " }}
   " LanguageClient {{
     let g:LanguageClient_diagnosticsEnable = 0
