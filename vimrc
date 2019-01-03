@@ -29,6 +29,7 @@
   Plug 'can3p/incbool.vim'                     " Increment not only numbers but also true/false, show/hide etc.
   Plug 'moll/vim-node'                         " Enable gf to open node modules
   Plug 'scrooloose/nerdtree'                   " File browser
+  Plug 'SirVer/ultisnips'                      " Snippets
   Plug 'tpope/vim-commentary'                  " Add comments in blocks
   Plug 'tpope/vim-surround'                    " Enable inserting brackets around words
   Plug 'tpope/vim-sleuth'                      " Automatically adjusts 'shiftwidth' and 'expandtab'
@@ -38,13 +39,11 @@
   Plug 'junegunn/vim-peekaboo'                 " See the contents of registers
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fuzzy finder <3
   Plug 'junegunn/fzf.vim'
-
   Plug 'roxma/nvim-yarp'                       " A dependency of 'ncm2'.
   Plug 'ncm2/ncm2'                             " Auto complete
   Plug 'ncm2/ncm2-bufword'
   Plug 'ncm2/ncm2-tmux'
   Plug 'ncm2/ncm2-path'
-
   Plug 'autozimu/LanguageClient-neovim', {
         \ 'branch': 'next',
         \ 'do': 'bash install.sh',
@@ -353,6 +352,11 @@
     " Use <TAB> to select the popup menu
     inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
     inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+    " Ultisnips expand
+    " inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+    " let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
+    " let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
+    " let g:UltiSnipsRemoveSelectModeMappings = 0
   " }}
   " LanguageClient {{
     let g:LanguageClient_diagnosticsEnable = 0
