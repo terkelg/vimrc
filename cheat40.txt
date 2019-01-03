@@ -4,8 +4,6 @@ Search files             :FZF …        N
 Git status files         :GFiles …     N
 Commits                  :Commits …    N
 Buffers                  :Buffers …    N
-CtrlP {{{2
-Open in buffer mode      «C-p»         N
 Easy Align {{{2
 Trigger Easy Align       \ea           O
 Commentary {{{2
