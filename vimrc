@@ -27,6 +27,7 @@
   Plug 'airblade/vim-gitgutter'                " Show git status in the sidebar
   Plug 'unblevable/quick-scope'                " Highlight characters to target for f, F
   Plug 'can3p/incbool.vim'                     " Increment not only numbers but also true/false, show/hide etc.
+  Plug 'editorconfig/editorconfig-vim'         " Respect editorconfig files
   Plug 'moll/vim-node'                         " Enable gf to open node modules
   Plug 'scrooloose/nerdtree'                   " File browser
   Plug 'SirVer/ultisnips'                      " Snippets
