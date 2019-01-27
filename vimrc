@@ -21,6 +21,11 @@
   set ttimeoutlen=10  " This must be a low value for <esc>-key not to be confused with an <a-…> mapping
 " }}
 " Install Plugins {{
+  if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+          \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  endif
   call plug#begin('~/.vim/plugged')
   Plug 'lifepillar/vim-cheat40'                " Cheat sheet for Vim
   Plug 'justinmk/vim-sneak'                    " Jump to any location specified by two characters
@@ -38,6 +43,9 @@
   Plug 'joshdick/onedark.vim'                  " Nice theme      
   Plug 'rakr/vim-one'                          " Another nice theme
   Plug 'junegunn/vim-peekaboo'                 " See the contents of registers
+  Plug 'Quramy/vim-js-pretty-template'         " Highlight template string contents
+  Plug 'jason0x43/vim-js-indent'               " JavaScript and TypeScript indentation
+  Plug 'Quramy/tsuquyomi'                      " Better TypeScript support
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fuzzy finder <3
   Plug 'junegunn/fzf.vim'
 
@@ -60,9 +68,6 @@
   set directory=~/.vim/tmp/swap
   set undofile " Enable persistent undo
   set undodir=~/.vim/tmp/undo
-  set undolevels=1000 " Maximum number of changes that can be undone
-  set undoreload=10000 " Maximum number of lines to save for undo on a buffer reload
-  set history=1000 " Store lots of :cmdline history
 " }}
 " Mouse {{
   set mouse=a " Enable mouse use in all modes
@@ -79,12 +84,9 @@
   nnoremap <c-e> <c-e><c-e>
   nnoremap <c-y> <c-y><c-y>
   " Start scrolling when we're getting close to margins
-  set scrolloff=10
-  set sidescrolloff=15
+  set scrolloff=10 " Minimal number of screen lines to keep above and below the cursor
+  set sidescrolloff=15 " Minimal side scroll offset
   set sidescroll=1
-  " Smooth scrolling that works both in terminal and in GUI Vim
-  nnoremap <silent> <c-u> :call <sid>smoothScroll(1)<cr>
-  nnoremap <silent> <c-d> :call <sid>smoothScroll(0)<cr>
 " }}
 " Indentation {{
   set autoindent " Use indentation of the first-line when reflowing a paragraph
@@ -108,7 +110,6 @@
   set ignorecase " Case-insensitive search by default
   set infercase " Smart case when doing keyword completion
   set smartcase " Use case-sensitive search if there is a capital letter in the search expression
-  set viminfo='100,f1 " Save up to 100 marks, enable capital marks
   set complete+=i " Use included files for completion
   set complete+=kspell " Use spell dictionary for completion, if available
   set completeopt=menuone,noselect
@@ -126,27 +127,15 @@
   endif
   set termguicolors 
   set display=lastline " prevent @ symbol on when lines doesn't fit 
-  " Get more information from ctrl-g:
-  nnoremap <c-g> 2<c-g>
   set notitle " Do not set the terminal title
   set number " Turn line numbering on
   set relativenumber " Display line numbers relative to the line with the cursor
   set laststatus=2 " Always show status line
   set cmdheight=1 " Increase space for command line
-  set shortmess+=Icm " No intro, suppress ins-completion messages, use [+] instead of [Modified]
-  set showcmd " Show (partial) command in the last line of the screen
+  set shortmess+=Im " No intro, use [+] instead of [Modified]
   set diffopt+=vertical " Diff in vertical mode
   set listchars=tab:▸\ ,trail:∙,space:∙,eol:¬,nbsp:▪,precedes:⟨,extends:⟩  " Invisible characters
   let &showbreak='↪ '
-" }}
-" Cursor {{
-  " Show block cursor in Normal mode and line cursor in Insert mode
-  " (use odd numbers for blinking cursor):
-  let &t_ti.="\e[2 q"
-  let &t_SI.="\e[6 q"
-  let &t_SR.="\e[4 q"
-  let &t_EI.="\e[2 q"
-  let &t_te.="\e[0 q"
 " }}
 " Autocommands {{
   augroup lf_autocmds
@@ -155,17 +144,11 @@
     " Resize windows when the terminal window size changes (from http://vimrcfu.com/snippet/186)
     autocmd VimResized * wincmd =
 
-    " If a file is large, disable syntax highlighting and other stuff
-    autocmd BufReadPre * let s = getfsize(expand("<afile>")) | if s > g:LargeFile || s == -2 | call lf_buffer#large(expand("<afile>")) | endif
-
     " On opening a file, jump to the last known cursor position (see :h line())
     autocmd BufReadPost *
       \ if line("'\"") > 1 && line("'\"") <= line("$") && &ft !~# 'commit' |
       \   exe "normal! g`\"" |
       \ endif
-
-    " Less intrusive swap prompt
-    autocmd SwapExists * call lf_file#swap_exists(expand("<afile>"))
 
     " Don't auto insert a comment when using O/o for a newline
     autocmd VimEnter,BufRead,FileType * set formatoptions-=o
@@ -177,22 +160,6 @@
     autocmd FocusGained * :checktime 
 
   augroup END
-" }}
-" Helper functions {{
-  " See http://stackoverflow.com/questions/4064651/what-is-the-best-way-to-do-smooth-scrolling-in-vim
-  fun! s:smoothScroll(up)
-    execute "normal " . (a:up ? "\<c-y>" : "\<c-e>")
-    redraw
-    for l:count in range(3, &scroll, 2)
-      sleep 10m
-      execute "normal " . (a:up ? "\<c-y>" : "\<c-e>")
-      redraw
-    endfor
-  endf
-" }}
-" Commands (plugins excluded) {{
-  " Clean up old undo files
-  command! -nargs=0 CleanUpUndoFiles !find ~/.vim/tmp/undo -type f -mtime +100d \! -name '.gitignore' -delete
 " }}
 " Key mappings (plugins excluded) {{
   " Use space as alternative leader
@@ -234,24 +201,7 @@
     noremap <c-j> <c-w><c-j>
     noremap <c-k> <c-w><c-k>
     noremap <c-l> <c-w><c-l>
-    noremap <c-h> <c-w><c-h>
-  " }}
-  " Square bracket mappings (many of them inspired by Unimpaired) {{
-    nnoremap <silent> [<space> :<c-u>put!=repeat(nr2char(10),v:count1)<cr>']+1
-    nnoremap <silent> ]<space> :<c-u>put=repeat(nr2char(10),v:count1)<cr>'[-1
-    nnoremap <silent> <leader>bn :<c-u>enew<cr>
-    nnoremap <silent> [a :<c-u><c-r>=v:count1<cr>prev<cr>
-    nnoremap <silent> ]a :<c-u><c-r>=v:count1<cr>next<cr>
-    nnoremap <silent> ]b :<c-u><c-r>=v:count1<cr>bn<cr>
-    nnoremap <silent> [b :<c-u><c-r>=v:count1<cr>bp<cr>
-    nnoremap <silent> ]l :<c-u><c-r>=v:count1<cr>lnext<cr>zz
-    nnoremap <silent> [l :<c-u><c-r>=v:count1<cr>lprevious<cr>zz
-  " }}
-  " Allow using alt in macOS without enabling “Use Option as Meta key” {{
-    nmap ¬ <a-l>
-    nmap ˙ <a-h>
-    nmap ∆ <a-j>
-    nmap ˚ <a-k>
+    noremap <c-h> <c-w><c-h>   
   " }}
   " Easier copy/pasting to/from OS clipboard {{
     nnoremap <leader>y "*y
@@ -262,21 +212,16 @@
     nnoremap <leader>P "*P
     vnoremap <leader>P "*P
   " }}
-  " Use Alt+arrows to jump between words {{
-    if has('terminal')
-      tnoremap <s-left> <esc>b
-      tnoremap <s-right> <esc>f
-    endif
-  " }}
-  " Buffers {{
+  " Buffers: b {{
     nnoremap          <leader>bb :<c-u>ls<cr>:b<space>
     nnoremap <silent> <leader>bn :<c-u>enew<cr>
     nnoremap          <leader>bf :<c-u>Buffers<cr>
     nnoremap <silent> <leader>bw :<c-u>bw<cr>
     nnoremap <silent> <leader>bW :<c-u>bw!<cr>
   " }}
-  " Files {{
+  " Files: f {{
     nnoremap          <leader>ff :<c-u>Files<cr>
+    nnoremap          <leader>p  :<c-u>Files<cr>
     nnoremap          <leader>fh :<c-u>FilesHidden<cr>
     nnoremap          <leader>fi :<c-u>FilesInside<cr>
     nnoremap          <leader>fl :<c-u>Lines<cr>
@@ -284,32 +229,13 @@
     nnoremap <silent> <leader>w  :<c-u>update<cr>
     nnoremap          <leader>fW :<c-u>w !sudo tee % >/dev/null<cr>
   " }}
-  " Options {{
+  " Options: o {{
     nnoremap <silent> <leader>oc :<c-u>setlocal cursorline!<cr>
     nnoremap <silent> <leader>oh :<c-u>set hlsearch! \| set hlsearch?<cr>
     nnoremap <silent> <leader>oi :<c-u>set ignorecase! \| set ignorecase?<cr>
-    nnoremap <silent> <leader>ok :<c-u>let &l:scrolloff = (&l:scrolloff == 999) ? g:default_scrolloff : 999<cr>
-    nnoremap <silent> <leader>ol :<c-u>setlocal list!<cr>
     nnoremap <silent> <leader>on :<c-u>setlocal number!<cr>
     nnoremap <silent> <leader>or :<c-u>setlocal relativenumber!<cr>
-    nnoremap <silent> <leader>os :<c-u>setlocal spell! \| set spell?<cr>
-    nnoremap <silent> <leader>ot :<c-u>setlocal expandtab!<cr>
   " }}
-  " View/toggle {{
-    nnoremap <silent> <leader>vm :<c-u>marks<cr>
-  " }}
-" }}
-" GUI {{
-  if has('gui_running')
-    let s:linespace=2
-    set guifont=SF\ Mono\ Light:h11
-    set guioptions=gm
-    set guicursor=n-v-c:block-blinkwait700-blinkon700-blinkoff300,i-o-r-ci-cr:ver15-blinkwait700-blinkon700-blinkoff300
-    let &linespace=s:linespace
-    set transparency=0
-    tnoremap <a-left> <esc>b
-    tnoremap <a-right> <esc>f
-  endif
 " }}
 " Plugins {{
   " Disabled Vim Plugins {{
@@ -329,13 +255,6 @@
   " Sneak {{
     let g:sneak#label = 1
     let g:sneak#use_ic_scs = 1 " Match according to ignorecase and smartcase
-  " }}
-  " Undotree {{
-    let g:undotree_WindowLayout = 2
-    let g:undotree_SplitWidth = 40
-    let g:undotree_SetFocusWhenToggle = 1
-    let g:undotree_TreeNodeShape = '◦'
-    nnoremap <silent> <leader>vu :<c-u>if !exists("g:loaded_undotree")<bar>packadd undotree<bar>endif<cr>:UndotreeToggle<cr>
   " }}
   " Vim-javascript {{
     let g:javascript_plugin_jsdoc = 1
@@ -357,7 +276,7 @@
     inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
     inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-    inoremap <silent> <expr> <CR> ((pumvisible() && empty(v:completed_item)) ?  "\<c-y>\<cr>" : (!empty(v:completed_item) ? ncm2_ultisnips#expand_or("", 'n') : "\<CR>" ))
+    inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
 
     " c-j c-k for moving in snippet
     smap <c-u> <Plug>(ultisnips_expand)
@@ -378,15 +297,18 @@
   " fzf {{
     " :Files add ! for fullscreen, toggle preview with ?
     command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, <bang>0 ? fzf#vim#with_preview('right:50%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
+
     " Like files, but including hidden files - overwrite default fzf command that don't include hidden files
     command! -bang -nargs=* -complete=dir FilesHidden call fzf#run(fzf#wrap({
           \ 'source': 'rg --files --hidden --no-ignore --follow --ignore-case'}, <bang>0))
-    " Serch in files with rg - https://medium.com/@crashybang/supercharge-vim-with-fzf-and-ripgrep-d4661fc853d2
+
+    " Serch in files with rg 
+    " - https://medium.com/@crashybang/supercharge-vim-with-fzf-and-ripgrep-d4661fc853d2
     let g:files_command = '
           \ rg --column --line-number --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
           \ -g "!{.git,node_modules,build,yarn.lock,dist}/*" '
     command! -bang -nargs=* FilesInside call fzf#vim#grep(g:files_command .shellescape(<q-args>), 1, <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%', '?'), <bang>0)
-    nnoremap          <leader>fz :<c-u>FZF<cr>
+    nnoremap <leader>fz :<c-u>FZF<cr>
   " }}
 " }}
 " Themes {{
@@ -398,8 +320,6 @@
   " }}
 " }}
 " Init {{
-  let g:LargeFile = 20*1024*1024 " 20MB
-
   " Local settings
   let s:vimrc_local = fnamemodify(resolve(expand('<sfile>:p')), ':h').'/vimrc_local'
   if filereadable(s:vimrc_local)
