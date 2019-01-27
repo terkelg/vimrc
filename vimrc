@@ -230,7 +230,7 @@
     nnoremap          <leader>ff :<c-u>Files<cr>
     nnoremap          <leader>p  :<c-u>Files<cr>
     nnoremap          <leader>fh :<c-u>FilesHidden<cr>
-    nnoremap          <leader>fi :<c-u>FilesInside<cr>
+    nnoremap          <leader>fi :<c-u>Rg<cr>
     nnoremap          <leader>fl :<c-u>Lines<cr>
     nnoremap <silent> <leader>fw :<c-u>update<cr>
     nnoremap <silent> <leader>w  :<c-u>update<cr>
@@ -299,18 +299,24 @@
   " }}
   " fzf {{
     " :Files add ! for fullscreen, toggle preview with ?
-    command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, <bang>0 ? fzf#vim#with_preview('right:50%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
+    command! -bang -nargs=? -complete=dir Files
+      \ call fzf#vim#files(<q-args>,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0)
+
+    " Add support to toggle preview for :Rg aswell
+    command! -bang -nargs=* Rg
+      \ call fzf#vim#grep(
+      \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0)
 
     " Like files, but including hidden files - overwrite default fzf command that don't include hidden files
     command! -bang -nargs=* -complete=dir FilesHidden call fzf#run(fzf#wrap({
           \ 'source': 'rg --files --hidden --no-ignore --follow --ignore-case'}, <bang>0))
 
-    " Serch in files with rg 
-    " - https://medium.com/@crashybang/supercharge-vim-with-fzf-and-ripgrep-d4661fc853d2
-    let g:files_command = '
-          \ rg --column --line-number --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
-          \ -g "!{.git,node_modules,build,yarn.lock,dist}/*" '
-    command! -bang -nargs=* FilesInside call fzf#vim#grep(g:files_command .shellescape(<q-args>), 1, <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%', '?'), <bang>0)
   " }}
 " }}
 " Themes {{
