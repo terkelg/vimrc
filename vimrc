@@ -203,6 +203,13 @@
     noremap <c-l> <c-w><c-l>
     noremap <c-h> <c-w><c-h>   
   " }}
+  " Allow using alt in macOS without enabling “Use Option as Meta key” {{
+    " https://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
+    nmap ¬ <a-l>
+    nmap ˙ <a-h>
+    nmap ∆ <a-j>
+    nmap ˚ <a-k>
+  " }}
   " Easier copy/pasting to/from OS clipboard {{
     nnoremap <leader>y "*y
     vnoremap <leader>y "*y
@@ -247,10 +254,6 @@
     let g:loaded_tarPlugin = 1
     let g:loaded_vimballPlugin = 1
     let g:loaded_zipPlugin = 1
-  " }}
-  " Easy Align {{
-    xmap <leader>ea <plug>(EasyAlign)
-    nmap <leader>ea <plug>(EasyAlign)
   " }}
   " Sneak {{
     let g:sneak#label = 1
@@ -308,7 +311,6 @@
           \ rg --column --line-number --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
           \ -g "!{.git,node_modules,build,yarn.lock,dist}/*" '
     command! -bang -nargs=* FilesInside call fzf#vim#grep(g:files_command .shellescape(<q-args>), 1, <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%', '?'), <bang>0)
-    nnoremap <leader>fz :<c-u>FZF<cr>
   " }}
 " }}
 " Themes {{

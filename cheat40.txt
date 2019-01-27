@@ -4,11 +4,6 @@ Search files             :FZF …        N
 Git status files         :GFiles …     N
 Commits                  :Commits …    N
 Buffers                  :Buffers …    N
-Easy Align {{{2
-Trigger Easy Align       \ea           O
-Commentary {{{2
-Comment out a line       gcc           N
-Comment out motion       gc            M
 Sneak {{{2
 Jump forward             s‹c›‹c›      VN
 Jump backward            S‹c›‹c›       N
@@ -22,8 +17,6 @@ Replace delimiters       cs‹c›‹c›      N
 Replace tags             cst‹c›        N
 Remove ‹c› delimiters    ds‹c›         N
 Remove enclosing tags    dst           N
-Undotree {{{2
-Toggle Undotree          \vu           N
 Vimrc {{{1
 Buffers and files {{{2
 Cd to current path       cd            N
@@ -36,14 +29,10 @@ Copy to clipboard        \y            O
 Copy line to clipboard   \Y            N
 Paste from clipboard     \p           VN
 Paste from clipboard     \P           VN
-Add blank line above     [«Spc»        N
-Add blank line below     ]«Spc»        N
-Remove trailing space    \es           N
 Search {{{2
 Find file in working dir \ff           N
 Ditto including dotfiles \fh           N
 Find in files (rg)       \fi           N
-Find with FZF            \fz           N
 Find buffers             \bf           N
 Go {{{2
 Go to window number n    \‹n›          N
@@ -51,13 +40,6 @@ Go to (tmux) left pane   «Alt-h»       N
 Go to (tmux) right pane  «Alt-l»       N
 Go to (tmux) pane below  «Alt-j»       N
 Go to (tmux) pane above  «Alt-k»       N
-Edit prev in arg list    [a            N
-Edit next in arg list    ]a            N
-Edit next file (:bn)     [b            N
-Edit prev file (:bp)     ]b            N
-Prev in location list    [l            N
-Next in location list    ]l            N
-Generate or update tags  :Ctags        N
 LanguageClient {{{2
 Go to definition         gd            N
 Rename item under cursor R             N
@@ -85,14 +67,9 @@ Change CWD to cursor dir cd            N
 Change tree root to CWD  CD            N
 Options {{{2
 Toggle Paste mode        «f9»          N
-Toggle autocompletion    \oa           N
 Toggle cursorline        \oc           N
 Toggle search highlight  \oh           N
 Toggle ignore case       \oi           N
-Centre text vertically   \ok           N
 Toggle invisibles        \ol           N
 Toggle line numbers      \on           N
 Toggle rel line numbers  \or           N
-Toggle spell checking    \os           N
-Toggle hard/soft tabs    \ot           N
-Toggle Quick-scope       \oq           N
