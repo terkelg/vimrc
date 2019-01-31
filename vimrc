@@ -48,6 +48,7 @@
   Plug 'Quramy/tsuquyomi'                      " Better TypeScript support
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fuzzy finder <3
   Plug 'junegunn/fzf.vim'
+  Plug 'w0rp/ale'                              " Linting/Fixing
 
   " Auto complete
   Plug 'roxma/nvim-yarp'                       " A dependency of 'ncm2'.
