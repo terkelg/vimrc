@@ -311,11 +311,5 @@
   " }}
 " }}
 " Init {{
-  " Local settings
-  let s:vimrc_local = fnamemodify(resolve(expand('<sfile>:p')), ':h').'/vimrc_local'
-  if filereadable(s:vimrc_local)
-    execute 'source' s:vimrc_local
-  else
-    colorscheme one
-  endif
+  colorscheme one
 " }}
