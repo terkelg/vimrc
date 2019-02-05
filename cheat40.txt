@@ -17,6 +17,16 @@ Replace delimiters       cs‹c›‹c›      N
 Replace tags             cst‹c›        N
 Remove ‹c› delimiters    ds‹c›         N
 Remove enclosing tags    dst           N
+Ale {{{2
+Previous error           «C-[»         N
+Next error               «C-]»         N
+Go to definition         gd            N
+Hover information        hv            N
+Find references          fr            N
+Ultisnips {{{2
+Expand                   «C-e»         I
+Next                     «C-j»         I
+Previous                 «C-k»         I
 Vimrc {{{1
 Buffers and files {{{2
 Cd to current path       cd            N

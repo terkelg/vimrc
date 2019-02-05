@@ -34,7 +34,7 @@
   Plug 'can3p/incbool.vim'                     " Increment not only numbers but also true/false, show/hide etc.
   Plug 'editorconfig/editorconfig-vim'         " Respect editorconfig files
   Plug 'moll/vim-node'                         " Enable gf to open node modules
-  Plug 'scrooloose/nerdtree'                   " File browser
+  Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " File browser
   Plug 'SirVer/ultisnips'                      " Snippets
   Plug 'tpope/vim-commentary'                  " Add comments in blocks
   Plug 'tpope/vim-surround'                    " Enable inserting brackets around words
@@ -48,19 +48,7 @@
   Plug 'Quramy/tsuquyomi'                      " Better TypeScript support
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fuzzy finder <3
   Plug 'junegunn/fzf.vim'
-  Plug 'w0rp/ale'                              " Linting/Fixing
-
-  " Auto complete
-  Plug 'roxma/nvim-yarp'                       " A dependency of 'ncm2'.
-  Plug 'ncm2/ncm2'                             " Auto complete
-  Plug 'ncm2/ncm2-bufword'
-  Plug 'ncm2/ncm2-tmux'
-  Plug 'ncm2/ncm2-path'
-  Plug 'ncm2/ncm2-ultisnips'                   " Trigger dynamic snippet of completed item
-  Plug 'autozimu/LanguageClient-neovim', {
-        \ 'branch': 'next',
-        \ 'do': 'bash install.sh',
-        \ }
+  Plug 'w0rp/ale'                              " Linting and language server
   call plug#end()
 " }}
 " History and Backup {{
@@ -263,40 +251,34 @@
   " Vim-javascript {{
     let g:javascript_plugin_jsdoc = 1
   " }}
+  " Ale {{
+    let g:ale_fix_on_save = 1
+    let g:ale_completion_enabled = 1
+    " Use a slightly slimmer error pointer
+    let g:ale_sign_error = '✖'
+    hi ALEErrorSign guifg=#DF8C8C
+    let g:ale_sign_warning = '⚠'
+    hi ALEWarningSign guifg=#F2C38F
+
+    nnoremap          <leader>gd :ALEGoToDefinition<cr>
+    nnoremap <silent> <leader>hv :ALEHover<cr>
+    nnoremap <silent> <leader>fr :ALEFindReferences<cr>
+
+    " Use ALT-[ and ALT-] to navigate errors
+    nmap <silent> “ <Plug>(ale_previous_wrap)
+    nmap <silent> ‘ <Plug>(ale_next_wrap)
+  " }}
   " Quick-scope {{
     nnoremap <silent> <leader>oq :<c-u>QuickScopeToggle<cr>
   " }}
+  " UltiSnips {{
+    let g:UltiSnipsExpandTrigger="<c-e>"
+  " }
   " Nerdtree {{
     " nnoremap <silent> <leader>vn :<c-u>if !exists("g:loaded_nerdtree")<bar>packadd nerdtree<bar>endif<cr>:NERDTreeToggle<cr>
     nnoremap <silent> <leader>vn :NERDTreeToggle<CR>
     " close vim if the only window left open is a NERDTree<Paste>
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-  " }}
-  " NCM2 {{
-    autocmd BufEnter  *  call ncm2#enable_for_buffer() 
-    " Use this mapping to close the menu and also start a new line on enter
-    inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-    " Use <TAB> to select the popup menu
-    inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-    inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
-
-    " c-j c-k for moving in snippet
-    smap <c-u> <Plug>(ultisnips_expand)
-    let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
-    let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
-    let g:UltiSnipsRemoveSelectModeMappings = 0
-  " }}
-  " LanguageClient {{
-    let g:LanguageClient_diagnosticsEnable = 0
-    let g:LanguageClient_serverCommands = {
-          \ 'javascript': ['javascript-typescript-stdio'],
-          \ 'javascript.jsx': ['javascript-typescript-stdio']
-          \ }
-    nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-    nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <silent> R :call LanguageClient#textDocument_rename()<CR>
   " }}
   " fzf {{
     " :Files add ! for fullscreen, toggle preview with ?
