@@ -44,7 +44,6 @@
   Plug 'rakr/vim-one'                          " Another nice theme
   Plug 'junegunn/vim-peekaboo'                 " See the contents of registers
   Plug 'Quramy/vim-js-pretty-template'         " Highlight template string contents
-  Plug 'jason0x43/vim-js-indent'               " JavaScript and TypeScript indentation
   Plug 'Quramy/tsuquyomi'                      " Better TypeScript support
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fuzzy finder <3
   Plug 'junegunn/fzf.vim'
