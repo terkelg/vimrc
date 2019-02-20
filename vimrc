@@ -40,11 +40,12 @@
   Plug 'tpope/vim-surround'                    " Enable inserting brackets around words
   Plug 'tpope/vim-sleuth'                      " Automatically adjusts 'shiftwidth' and 'expandtab'
   Plug 'sheerun/vim-polyglot'                  " Syntax highlighting for more languages
-  Plug 'joshdick/onedark.vim'                  " Nice theme      
+  "Plug 'joshdick/onedark.vim'                  " Nice theme      
   Plug 'rakr/vim-one'                          " Another nice theme
   Plug 'junegunn/vim-peekaboo'                 " See the contents of registers
-  Plug 'Quramy/vim-js-pretty-template'         " Highlight template string contents
-  Plug 'Quramy/tsuquyomi'                      " Better TypeScript support
+  "Plug 'Quramy/vim-js-pretty-template'         " Highlight template string contents
+  Plug 'Shougo/vimproc.vim', {'do' : 'make'}   " Needed for Tsuquyomi only ... remove when they get neovim support
+  Plug 'Quramy/tsuquyomi'                      " Better TypeScript support (Autoimport is key!)
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fuzzy finder <3
   Plug 'junegunn/fzf.vim'
   Plug 'w0rp/ale'                              " Linting and language server
@@ -251,7 +252,7 @@
     let g:javascript_plugin_jsdoc = 1
   " }}
   " Ale {{
-    let g:ale_fix_on_save = 1
+    let g:ale_fix_on_save = 0
     let g:ale_completion_enabled = 1
     " Use a slightly slimmer error pointer
     let g:ale_sign_error = '✖'
@@ -259,9 +260,9 @@
     let g:ale_sign_warning = '⚠'
     hi ALEWarningSign guifg=#F2C38F
 
-    nnoremap          <leader>gd :ALEGoToDefinition<cr>
-    nnoremap <silent> <leader>hv :ALEHover<cr>
-    nnoremap <silent> <leader>fr :ALEFindReferences<cr>
+    nnoremap          <leader>ad :ALEGoToDefinition<cr>
+    nnoremap <silent> <leader>av :ALEHover<cr>
+    nnoremap <silent> <leader>ar :ALEFindReferences<cr>
 
     " Use ALT-[ and ALT-] to navigate errors
     nmap <silent> “ <Plug>(ale_previous_wrap)
@@ -272,7 +273,7 @@
   " }}
   " UltiSnips {{
     let g:UltiSnipsExpandTrigger="<c-e>"
-  " }
+  " }}
   " Nerdtree {{
     " nnoremap <silent> <leader>vn :<c-u>if !exists("g:loaded_nerdtree")<bar>packadd nerdtree<bar>endif<cr>:NERDTreeToggle<cr>
     nnoremap <silent> <leader>vn :NERDTreeToggle<CR>
@@ -299,6 +300,12 @@
     command! -bang -nargs=* -complete=dir FilesHidden call fzf#run(fzf#wrap({
           \ 'source': 'rg --files --hidden --no-ignore --follow --ignore-case'}, <bang>0))
 
+  " }}
+  " Tsuquyomi {{
+    let g:tsuquyomi_shortest_import_path = 1 
+    nnoremap <silent> <leader>ti :TsuImport<cr>
+    nnoremap <silent> <leader>td :TsuDefinition<cr>
+    nnoremap <silent> <leader>ti :TsuImport<cr>
   " }}
 " }}
 " Themes {{
