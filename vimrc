@@ -146,7 +146,8 @@
     autocmd! BufWritePost vimrc so ~/.vim/vimrc"
 
     " Automatically reload files when changed
-    autocmd FocusGained * :checktime 
+    autocmd FocusGained, BufEnter * :checktime 
+    autocmd CursorHold,CursorHoldI * checktime
 
   augroup END
 " }}
@@ -303,6 +304,8 @@
   " }}
   " Tsuquyomi {{
     let g:tsuquyomi_shortest_import_path = 1 
+    let g:tsuquyomi_disable_quickfix = 1
+    let g:tsuquyomi_single_quote_import	= 1
     nnoremap <silent> <leader>ti :TsuImport<cr>
     nnoremap <silent> <leader>td :TsuDefinition<cr>
     nnoremap <silent> <leader>ti :TsuImport<cr>
