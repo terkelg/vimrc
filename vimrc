@@ -218,7 +218,7 @@
   " }}
   " Files: f {{
     nnoremap          <leader>ff :<c-u>Files<cr>
-    nnoremap          <leader>p  :<c-u>Files<cr>
+    nnoremap          <leader><space> :<c-u>Files<cr>
     nnoremap          <leader>fh :<c-u>FilesHidden<cr>
     nnoremap          <leader>fi :<c-u>Rg<cr>
     nnoremap          <leader>fl :<c-u>Lines<cr>
@@ -268,6 +268,10 @@
     " Use ALT-[ and ALT-] to navigate errors
     nmap <silent> “ <Plug>(ale_previous_wrap)
     nmap <silent> ‘ <Plug>(ale_next_wrap)
+
+    " Use <tab> to cycle autocompleion
+    inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
+    inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-TAB>"
   " }}
   " Quick-scope {{
     nnoremap <silent> <leader>oq :<c-u>QuickScopeToggle<cr>
