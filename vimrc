@@ -42,8 +42,6 @@
   Plug 'SirVer/ultisnips'                      " Snippets
   Plug 'sheerun/vim-polyglot'                  " Syntax highlighting for more languages
   Plug 'rakr/vim-one'                          " Another nice theme
-  Plug 'w0rp/ale'                              " Linting and language server
-
   Plug 'junegunn/vim-peekaboo'                 " See the contents of registers
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fuzzy finder <3
   Plug 'junegunn/fzf.vim'
@@ -225,6 +223,8 @@
     nnoremap          <leader>bf :<c-u>Buffers<cr>
     nnoremap <silent> <leader>bw :<c-u>bw<cr>
     nnoremap <silent> <leader>bW :<c-u>bw!<cr>
+    nnoremap <silent> ]b :<c-u><c-r>=v:count1<cr>bn<cr>
+    nnoremap <silent> [b :<c-u><c-r>=v:count1<cr>bp<cr>
   " }}
   " Files: f {{
     nnoremap          <leader>ff :<c-u>Files<cr>
@@ -261,17 +261,6 @@
   " }}
   " Vim-javascript {{
     let g:javascript_plugin_jsdoc = 1
-  " }}
-  " Ale {{
-    let g:ale_fix_on_save = 0
-    let g:ale_sign_error = '✖'
-    let g:ale_sign_warning = '⚠'
-    hi ALEErrorSign guifg=#DF8C8C
-    hi ALEWarningSign guifg=#F2C38F
-
-    " Use ALT-[ and ALT-] to navigate errors
-    nmap <silent> “ <Plug>(ale_previous_wrap)
-    nmap <silent> ‘ <Plug>(ale_next_wrap)
   " }}
   " Quick-scope {{
     nnoremap <silent> <leader>oq :<c-u>QuickScopeToggle<cr>
@@ -312,12 +301,11 @@
             \ 'typescript.tsx': ['javascript-typescript-stdio'],
             \ })
     endif
-
     nnoremap <silent> <leader>ls :call LanguageClient_contextMenu()<cr>
-    nnoremap          <leader>gh :call LanguageClient#textDocument_hover()<cr>
-    nnoremap <silent> <leader>gd :call LanguageClient#textDocument_definition()<cr>
-    nnoremap <silent> <leader>gr :call LanguageClient#textDocument_rename()<cr>
-
+    nnoremap <silent> <leader>la :call LanguageClient#textDocument_codeAction()<cr>
+    nnoremap <silent> <leader>lh :call LanguageClient#textDocument_hover()<cr>
+    nnoremap <silent> <leader>ld :call LanguageClient#textDocument_definition()<cr>
+    nnoremap <silent> <leader>lr :call LanguageClient#textDocument_rename()<cr>
   " }}
   " fzf {{
     " :Files add ! for fullscreen, toggle preview with ?

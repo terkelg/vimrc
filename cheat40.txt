@@ -17,12 +17,6 @@ Replace delimiters       cs‹c›‹c›      N
 Replace tags             cst‹c›        N
 Remove ‹c› delimiters    ds‹c›         N
 Remove enclosing tags    dst           N
-Ale {{{2
-Previous error           «C-[»         N
-Next error               «C-]»         N
-Go to definition         gd            N
-Hover information        hv            N
-Find references          fr            N
 Ultisnips {{{2
 Expand                   «C-e»         I
 Next                     «C-j»         I
@@ -51,7 +45,11 @@ Go to (tmux) right pane  «Alt-l»       N
 Go to (tmux) pane below  «Alt-j»       N
 Go to (tmux) pane above  «Alt-k»       N
 LanguageClient {{{2
-Go to definition         gd            N
+Context Menu             ls            N
+Code Action              la            N
+Hover                    lh            N
+Go to definition         ld            N
+Rename                   lr            N
 Rename item under cursor R             N
 Call hover info          K             N
 NERDTree {{{2
