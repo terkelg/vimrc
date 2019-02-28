@@ -28,7 +28,7 @@
   endif
   call plug#begin('~/.vim/plugged')
   Plug 'lifepillar/vim-cheat40'                " Cheat sheet for Vim
-  Plug 'lifepillar/vim-mucomplete'             " Simple auto-complete
+  "Plug 'lifepillar/vim-mucomplete'             " Simple auto-complete
   Plug 'tpope/vim-commentary'                  " Add comments in blocks
   Plug 'tpope/vim-surround'                    " Enable inserting brackets around words
   Plug 'tpope/vim-sleuth'                      " Automatically adjusts 'shiftwidth' and 'expandtab'
@@ -42,15 +42,17 @@
   Plug 'SirVer/ultisnips'                      " Snippets
   Plug 'sheerun/vim-polyglot'                  " Syntax highlighting for more languages
   Plug 'rakr/vim-one'                          " Another nice theme
+  Plug 'w0rp/ale'                              " Linting and language server
+
   Plug 'junegunn/vim-peekaboo'                 " See the contents of registers
-  Plug 'Shougo/vimproc.vim', {'do' : 'make'}   " Needed for Tsuquyomi only ... remove when they get neovim support
-  Plug 'Quramy/tsuquyomi'                      " Better TypeScript support (Autoimport is key!)
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fuzzy finder <3
   Plug 'junegunn/fzf.vim'
-  " Plug 'w0rp/ale'                              " Linting and language server
 
   Plug 'roxma/nvim-yarp'
   Plug 'ncm2/ncm2'
+  Plug 'ncm2/ncm2-bufword'
+  Plug 'ncm2/ncm2-path'
+  Plug 'ncm2/ncm2-ultisnips'
   Plug 'autozimu/LanguageClient-neovim', {
         \ 'branch': 'next',
         \ 'do': 'bash install.sh',
@@ -107,7 +109,8 @@
   set smartcase " Use case-sensitive search if there is a capital letter in the search expression
   set complete+=i " Use included files for completion
   set complete+=kspell " Use spell dictionary for completion, if available
-  set completeopt=menuone,noselect
+  set completeopt=noinsert,menuone,noselect
+  set shortmess+=c " suppress the 'match x of y', 'The only match' and 'Pattern not found' messages
   " Files and directories to ignore
   set wildignore+=.DS_Store,Icon\?,*.dmg,*.git,*.pyc,*.o,*.obj,*.so,*.swp,*.zip
   set wildmenu " Show possible matches when autocompleting
@@ -282,18 +285,32 @@
     nnoremap <silent> <leader>oq :<c-u>QuickScopeToggle<cr>
   " }}
   " UltiSnips {{
-    let g:UltiSnipsExpandTrigger="<c-e>"
-    let g:UltiSnipsJumpForwardTrigger = "<c-b>"  " Do not use <c-j>
+    let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
+    let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
+    let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
+    let g:UltiSnipsRemoveSelectModeMappings = 0
   " }}
   " Nerdtree {{
     nnoremap <silent> <leader>vn :NERDTreeToggle<CR>
     " close vim if the only window left open is a NERDTree<Paste>
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
   " }}
+  " Ncm2 {{
+    autocmd BufEnter * call ncm2#enable_for_buffer()
+    inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+
+    " inoremap <c-c> <ESC>
+    inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+    " snippets first
+    let g:ncm2_ultisnips#source = {'priority': 10}
+
+		" c-j c-k for moving in snippet
+    imap <expr> <c-u> ncm2_ultisnips#expand_or("\<Plug>(ultisnips_expand)", 'm')
+    smap <c-u> <Plug>(ultisnips_expand)
+  " }}
   " Language Server {{
-    nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
-    nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
     let g:LanguageClient_serverCommands = {}
     if executable('javascript-typescript-stdio')
       let g:LanguageClient_serverCommands = extend(g:LanguageClient_serverCommands, {
@@ -303,6 +320,11 @@
             \ 'typescript.tsx': ['javascript-typescript-stdio'],
             \ })
     endif
+
+    nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
+    nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+    nnoremap <silent> gr :call LanguageClient#textDocument_rename()<CR>
+
   " }}
   " fzf {{
     " :Files add ! for fullscreen, toggle preview with ?
@@ -325,21 +347,10 @@
           \ 'source': 'rg --files --hidden --no-ignore --follow --ignore-case'}, <bang>0))
 
   " }}
-  " Tsuquyomi {{
-    let g:tsuquyomi_shortest_import_path = 1 
-    let g:tsuquyomi_disable_quickfix = 1
-    let g:tsuquyomi_single_quote_import	= 1
-    nnoremap <silent> <leader>ti :TsuImport<cr>
-    nnoremap <silent> <leader>td :TsuDefinition<cr>
-    nnoremap <silent> <leader>ti :TsuImport<cr>
-  " }}
 " }}
 " Themes {{
   " vimone {{
     let g:one_allow_italics = 1
-  " }}
-  " onedark {{
-    let g:onedark_terminal_italics = 1
   " }}
 " }}
 " Init {{
