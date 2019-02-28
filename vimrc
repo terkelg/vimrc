@@ -263,24 +263,15 @@
     let g:javascript_plugin_jsdoc = 1
   " }}
   " Ale {{
-    " let g:ale_fix_on_save = 0
-    " " Use a slightly slimmer error pointer
-    " let g:ale_sign_error = '✖'
-    " hi ALEErrorSign guifg=#DF8C8C
-    " let g:ale_sign_warning = '⚠'
-    " hi ALEWarningSign guifg=#F2C38F
+    let g:ale_fix_on_save = 0
+    let g:ale_sign_error = '✖'
+    let g:ale_sign_warning = '⚠'
+    hi ALEErrorSign guifg=#DF8C8C
+    hi ALEWarningSign guifg=#F2C38F
 
-    " nnoremap          <leader>ad :ALEGoToDefinition<cr>
-    " nnoremap <silent> <leader>av :ALEHover<cr>
-    " nnoremap <silent> <leader>ar :ALEFindReferences<cr>
-
-    " " Use ALT-[ and ALT-] to navigate errors
-    " nmap <silent> “ <Plug>(ale_previous_wrap)
-    " nmap <silent> ‘ <Plug>(ale_next_wrap)
-
-    " Use <tab> to cycle autocompleion
-    " inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
-    " inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+    " Use ALT-[ and ALT-] to navigate errors
+    nmap <silent> “ <Plug>(ale_previous_wrap)
+    nmap <silent> ‘ <Plug>(ale_next_wrap)
   " }}
   " Quick-scope {{
     nnoremap <silent> <leader>oq :<c-u>QuickScopeToggle<cr>
@@ -322,9 +313,10 @@
             \ })
     endif
 
-    nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
-    nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <silent> gr :call LanguageClient#textDocument_rename()<CR>
+    nnoremap <silent> <leader>ls :call LanguageClient_contextMenu()<cr>
+    nnoremap          <leader>gh :call LanguageClient#textDocument_hover()<cr>
+    nnoremap <silent> <leader>gd :call LanguageClient#textDocument_definition()<cr>
+    nnoremap <silent> <leader>gr :call LanguageClient#textDocument_rename()<cr>
 
   " }}
   " fzf {{
