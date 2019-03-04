@@ -28,7 +28,6 @@
   endif
   call plug#begin('~/.vim/plugged')
   Plug 'lifepillar/vim-cheat40'                " Cheat sheet for Vim
-  "Plug 'lifepillar/vim-mucomplete'             " Simple auto-complete
   Plug 'tpope/vim-commentary'                  " Add comments in blocks
   Plug 'tpope/vim-surround'                    " Enable inserting brackets around words
   Plug 'tpope/vim-sleuth'                      " Automatically adjusts 'shiftwidth' and 'expandtab'
@@ -42,6 +41,7 @@
   Plug 'SirVer/ultisnips'                      " Snippets
   Plug 'sheerun/vim-polyglot'                  " Syntax highlighting for more languages
   Plug 'rakr/vim-one'                          " Another nice theme
+  Plug 'vimwiki/vimwiki', { 'branch': 'dev' }  " Knowdlege bank
   Plug 'junegunn/vim-peekaboo'                 " See the contents of registers
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fuzzy finder <3
   Plug 'junegunn/fzf.vim'
@@ -327,6 +327,9 @@
     command! -bang -nargs=* -complete=dir FilesHidden call fzf#run(fzf#wrap({
           \ 'source': 'rg --files --hidden --no-ignore --follow --ignore-case'}, <bang>0))
 
+  " }}
+  " vimwiki {{
+    let g:vimwiki_list = [{'path': '~/Dropbox/Documents/wiki', 'ext': '.md'}] 
   " }}
 " }}
 " Themes {{
