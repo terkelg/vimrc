@@ -12,5 +12,4 @@ link:
 
 install:
 	nvim --headless +PlugInstall +UpdateRemotePlugins +qall
-	cd ~/.config/coc/extensions
-	yarn add "${EXTENSIONS}"
+	cd ~/.config/coc/extensions && yarn add "${EXTENSIONS}"

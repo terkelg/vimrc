@@ -262,9 +262,6 @@
   " }}
   " CoC {{
 
-    let s:coc_extensions = ['coc-tsserver', 'coc-snippets', 'coc-css', 'coc-highlight', 'coc-pairs']
-    ""call coc#add_extension(join(get(s:, 'coc_extensions', [])))
-
     " Actions
     nnoremap <leader>q :call CocAction('doQuickfix')<cr>
     nnoremap <leader>q :call CocAction('doQuickfix')<cr>
