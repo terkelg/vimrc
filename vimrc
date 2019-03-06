@@ -38,7 +38,6 @@
   Plug 'editorconfig/editorconfig-vim'         " Respect editorconfig files
   Plug 'moll/vim-node'                         " Enable gf to open node modules
   Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " File browser
-  Plug 'SirVer/ultisnips'                      " Snippets
   Plug 'sheerun/vim-polyglot'                  " Syntax highlighting for more languages
   Plug 'rakr/vim-one'                          " Another nice theme
   Plug 'vimwiki/vimwiki', { 'branch': 'dev' }  " Knowdlege bank
