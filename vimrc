@@ -46,16 +46,7 @@
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fuzzy finder <3
   Plug 'junegunn/fzf.vim'
 
-  Plug 'roxma/nvim-yarp'
-  Plug 'ncm2/ncm2'
-  Plug 'ncm2/ncm2-bufword'
-  Plug 'ncm2/ncm2-path'
-  Plug 'ncm2/ncm2-ultisnips'
-  Plug 'ncm2/ncm2-cssomni'
-  Plug 'autozimu/LanguageClient-neovim', {
-        \ 'branch': 'next',
-        \ 'do': 'bash install.sh',
-        \ }
+  Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
   call plug#end()
 " }}
 " History and Backup {{
@@ -276,36 +267,44 @@
     " close vim if the only window left open is a NERDTree<Paste>
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
   " }}
-  " Ncm2 {{
-    autocmd BufEnter * call ncm2#enable_for_buffer()
-    inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
-
-    " inoremap <c-c> <ESC>
-    inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-    " snippets first
-    let g:ncm2_ultisnips#source = {'priority': 10}
-
-		" c-j c-k for moving in snippet
-    imap <expr> <c-u> ncm2_ultisnips#expand_or("\<Plug>(ultisnips_expand)", 'm')
-    smap <c-u> <Plug>(ultisnips_expand)
-  " }}
   " Language Server {{
-    let g:LanguageClient_serverCommands = {}
-    if executable('javascript-typescript-stdio')
-      let g:LanguageClient_serverCommands = extend(g:LanguageClient_serverCommands, {
-            \ 'javascript': ['javascript-typescript-stdio'],
-            \ 'typescript': ['javascript-typescript-stdio'],
-            \ 'javascript.jsx': ['javascript-typescript-stdio'],
-            \ 'typescript.tsx': ['javascript-typescript-stdio'],
-            \ })
+  inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ coc#refresh()
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"    
+
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+  endfunction
+
+  " Use <c-space> for trigger completion.
+  "inoremap <silent><expr> <c-space> coc#refresh()
+
+  vmap <leader>a  <Plug>(coc-codeaction-selected)
+  nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+  nmap <leader>cf  <Plug>(coc-fix-current)
+  nmap <leader>ca  <Plug>(coc-codeaction)
+  nmap <leader>c0  <Plug>(coc-openlink)
+  nmap <leader>cf <Plug>(coc-format)
+  nmap <leader>cr <Plug>(coc-format)
+
+  " Use K for show documentation in preview window
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+  " Make this leader q
+  nnoremap <silent> F :call CocAction('doQuickfix')<CR>
+
+  function! s:show_documentation()
+    if &filetype == 'vim'
+      execute 'h '.expand('<cword>')
+    else
+      call CocAction('doHover')
     endif
-    nnoremap <silent> <leader>ls :call LanguageClient_contextMenu()<cr>
-    nnoremap <silent> <leader>la :call LanguageClient#textDocument_codeAction()<cr>
-    nnoremap <silent> <leader>lh :call LanguageClient#textDocument_hover()<cr>
-    nnoremap <silent> <leader>ld :call LanguageClient#textDocument_definition()<cr>
-    nnoremap <silent> <leader>lr :call LanguageClient#textDocument_rename()<cr>
+  endfunction
+
   " }}
   " fzf {{
     " :Files add ! for fullscreen, toggle preview with ?
