@@ -4,3 +4,9 @@ npm install -g javascript-typescript-langserver   # language server used for js-
 npm install -g neovim                             # node neovim client
 npm install -g typescript                         # some people like types in their JS
 pip3 install neovim                               # install python nvim client
+
+brew install yarn                                 # CoC uses yarn
+brew install watchman                             # CoC uses watchman
+
+# TODO: Add script here to install plugins
+# Make symlink for neovim

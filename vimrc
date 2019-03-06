@@ -255,58 +255,47 @@
   " Quick-scope {{
     nnoremap <silent> <leader>oq :<c-u>QuickScopeToggle<cr>
   " }}
-  " UltiSnips {{
-    let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
-    let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
-    let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
-    let g:UltiSnipsRemoveSelectModeMappings = 0
-  " }}
   " Nerdtree {{
     nnoremap <silent> <leader>vn :NERDTreeToggle<CR>
     " close vim if the only window left open is a NERDTree<Paste>
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
   " }}
-  " Language Server {{
+  " CoC {{
 
-  let s:coc_extensions = ['coc-tsserver', 'coc-snippets', 'coc-css', 'coc-highlight', 'coc-pairs']
-  call coc#add_extension(join(get(s:, 'coc_extensions', [])))
+    let s:coc_extensions = ['coc-tsserver', 'coc-snippets', 'coc-css', 'coc-highlight', 'coc-pairs']
+    ""call coc#add_extension(join(get(s:, 'coc_extensions', [])))
 
-  inoremap <silent><expr> <TAB>
-        \ pumvisible() ? "\<C-n>" :
-        \ <SID>check_back_space() ? "\<TAB>" :
-        \ coc#refresh()
-  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"    
+    " Actions
+    nnoremap <leader>q :call CocAction('doQuickfix')<cr>
+    nnoremap <leader>q :call CocAction('doQuickfix')<cr>
 
-  function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-  endfunction
+    " Plugs
+    vnoremap <leader>ca  <Plug>(coc-codeaction-selected)
+    inoremap <leader>ca  <Plug>(coc-codeaction-selected)
+    nnoremap <leader>co  <Plug>(coc-openlink)
+    nnoremap <leader>cd :call <SID>show_documentation()<cr>
 
-  " Use <c-space> for trigger completion.
-  "inoremap <silent><expr> <c-space> coc#refresh()
+    " expadn snippets with enter
+    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
 
-  vmap <leader>a  <Plug>(coc-codeaction-selected)
-  nmap <leader>a  <Plug>(coc-codeaction-selected)
+    inoremap <silent><expr> <TAB>
+          \ pumvisible() ? "\<C-n>" :
+          \ <SID>check_back_space() ? "\<TAB>" :
+          \ coc#refresh()
+    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"    
 
-  nmap <leader>cf  <Plug>(coc-fix-current)
-  nmap <leader>ca  <Plug>(coc-codeaction)
-  nmap <leader>c0  <Plug>(coc-openlink)
-  nmap <leader>cf <Plug>(coc-format)
-  nmap <leader>cr <Plug>(coc-format)
+    function! s:check_back_space() abort
+      let col = col('.') - 1
+      return !col || getline('.')[col - 1]  =~# '\s'
+    endfunction
 
-  " Use K for show documentation in preview window
-  nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-  " Make this leader q
-  nnoremap <silent> F :call CocAction('doQuickfix')<CR>
-
-  function! s:show_documentation()
-    if &filetype == 'vim'
-      execute 'h '.expand('<cword>')
-    else
-      call CocAction('doHover')
-    endif
-  endfunction
+    function! s:show_documentation()
+      if &filetype == 'vim'
+        execute 'h '.expand('<cword>')
+      else
+        call CocAction('doHover')
+      endif
+    endfunction
 
   " }}
   " fzf {{
