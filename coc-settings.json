@@ -1,0 +1,6 @@
+{
+  "javascript.preferences.quoteStyle":"single",
+  "diagnostic.errorSign":"✖",
+  "diagnostic.hintSign":"•",
+  "diagnostic.infoSign":"•"
+}
