@@ -268,6 +268,10 @@
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
   " }}
   " Language Server {{
+
+  let s:coc_extensions = ['coc-tsserver', 'coc-snippets', 'coc-css', 'coc-highlight', 'coc-pairs']
+  call coc#add_extension(join(get(s:, 'coc_extensions', [])))
+
   inoremap <silent><expr> <TAB>
         \ pumvisible() ? "\<C-n>" :
         \ <SID>check_back_space() ? "\<TAB>" :
