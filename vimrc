@@ -262,18 +262,24 @@
   " }}
   " CoC {{
 
-    " Actions
-    nnoremap <leader>q :call CocAction('doQuickfix')<cr>
-    nnoremap <leader>q :call CocAction('doQuickfix')<cr>
+"     nmap <leader> ac <Plug>(coc-codeaction)
+"     nmap <leader> qf <Plug>(coc-fix-current)
+"     nmap <leader> op <Plug>(coc-openlink)
+"     nmap <leader> cs :call <SID>show_documentation()<cr>
+"     nmap <silent> <leader> gd <Plug>(coc-definition)
+"     nmap <silent> <leader> gt <Plug>(coc-type-definition)
+"     nmap <silent> <leader> gi <Plug>(coc-implementation)
+"     nmap <silent> <leader> re <Plug>(coc-references)
 
-    " Plugs
-    vnoremap <leader>ca  <Plug>(coc-codeaction-selected)
-    inoremap <leader>ca  <Plug>(coc-codeaction-selected)
-    nnoremap <leader>co  <Plug>(coc-openlink)
-    nnoremap <leader>cd :call <SID>show_documentation()<cr>
+    " Use `[c` and `]c` for navigate diagnostics
+    " nmap <silent> [c <Plug>(coc-diagnostic-prev)
+    " nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+    " " Show commands
+    " nnoremap <silent> <space>cc  :<C-u>CocList commands<cr>
 
     " expadn snippets with enter
-    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
     inoremap <silent><expr> <TAB>
           \ pumvisible() ? "\<C-n>" :
