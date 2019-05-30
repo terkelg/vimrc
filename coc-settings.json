@@ -3,6 +3,6 @@
   "diagnostic.errorSign": "✖",
   "diagnostic.hintSign": "•",
   "diagnostic.infoSign": "•",
-  "git.addGlameToVirtualText": true,
+  "git.addGlameToVirtualText": false,
   "git.addGlameToBufferVar": true
 }
