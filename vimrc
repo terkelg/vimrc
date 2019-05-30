@@ -40,8 +40,8 @@
   Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " File browser
   Plug 'sheerun/vim-polyglot'                  " Syntax highlighting for more languages
   Plug 'rakr/vim-one'                          " Another nice theme
-  Plug 'vimwiki/vimwiki', { 'branch': 'dev' }  " Knowdlege bank
   Plug 'junegunn/vim-peekaboo'                 " See the contents of registers
+
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fuzzy finder <3
   Plug 'junegunn/fzf.vim'
 
@@ -289,7 +289,16 @@
 
     " coc-yank 
     nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
-    set statusline^=%{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{get(b:,'coc_git_blame','')}
+
+    " start of default statusline
+		set statusline=%f\ %h%w%m%r\ 
+
+		" Syntastic statusline
+		" set statusline+=%#warningmsg#
+    set statusline+=%{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{get(b:,'coc_git_blame','')}
+		set statusline+=%*
+		" end of default statusline (with ruler)
+		set statusline+=%=%(%l,%c%V\ %=\ %P%)
 
     " expadn snippets with enter
     inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
@@ -334,9 +343,6 @@
     command! -bang -nargs=* -complete=dir FilesHidden call fzf#run(fzf#wrap({
           \ 'source': 'rg --files --hidden --no-ignore --follow --ignore-case'}, <bang>0))
 
-  " }}
-  " vimwiki {{
-    let g:vimwiki_list = [{'path': '~/Dropbox/Documents/wiki', 'ext': '.md'}] 
   " }}
 " }}
 " Themes {{
