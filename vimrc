@@ -32,7 +32,7 @@
   Plug 'tpope/vim-surround'                    " Enable inserting brackets around words
   Plug 'tpope/vim-sleuth'                      " Automatically adjusts 'shiftwidth' and 'expandtab'
   Plug 'justinmk/vim-sneak'                    " Jump to any location specified by two characters
-  Plug 'airblade/vim-gitgutter'                " Show git status in the sidebar
+  " Plug 'airblade/vim-gitgutter'                " Show git status in the sidebar
   Plug 'unblevable/quick-scope'                " Highlight characters to target for f, F
   Plug 'can3p/incbool.vim'                     " Increment not only numbers but also true/false, show/hide etc.
   Plug 'editorconfig/editorconfig-vim'         " Respect editorconfig files
@@ -262,6 +262,20 @@
   " }}
   " CoC {{
 
+  let g:coc_global_extensions = [
+        \ 'coc-tsserver',
+        \ 'coc-css',
+        \ 'coc-json',
+        \ 'coc-html',
+        \ 'coc-dictionary',
+        \ 'coc-omni',
+        \ 'coc-pairs',
+        \ 'coc-git',
+        \ 'coc-yank',
+        \ 'coc-snippets',
+        \ 'coc-highlight'
+        \ ]
+
     " Actions
     nnoremap <leader>q :call CocAction('doQuickfix')<cr>
     nnoremap <leader>q :call CocAction('doQuickfix')<cr>
@@ -271,6 +285,10 @@
     inoremap <leader>ca  <Plug>(coc-codeaction-selected)
     nnoremap <leader>co  <Plug>(coc-openlink)
     nnoremap <leader>cd :call <SID>show_documentation()<cr>
+
+    " coc-yank 
+    nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+    set statusline^=%{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{get(b:,'coc_git_blame','')}
 
     " expadn snippets with enter
     inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"

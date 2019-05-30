@@ -1,6 +1,8 @@
 {
-  "javascript.preferences.quoteStyle":"single",
-  "diagnostic.errorSign":"✖",
-  "diagnostic.hintSign":"•",
-  "diagnostic.infoSign":"•"
+  "javascript.preferences.quoteStyle": "single",
+  "diagnostic.errorSign": "✖",
+  "diagnostic.hintSign": "•",
+  "diagnostic.infoSign": "•",
+  "git.addGlameToVirtualText": true,
+  "git.addGlameToBufferVar": true
 }
