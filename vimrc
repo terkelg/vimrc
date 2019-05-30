@@ -217,7 +217,7 @@
   " Buffers: b {{
     nnoremap          <leader>bb :<c-u>ls<cr>:b<space>
     nnoremap <silent> <leader>bn :<c-u>enew<cr>
-    nnoremap          <leader>bf :<c-u>Buffers<cr>
+    nnoremap          <leader>bf :<c-u>CocList buffers<cr>
     nnoremap <silent> <leader>bw :<c-u>bw<cr>
     nnoremap <silent> <leader>bW :<c-u>bw!<cr>
     nnoremap <silent> ]b :<c-u><c-r>=v:count1<cr>bn<cr>
@@ -229,7 +229,6 @@
     nnoremap          <leader>ff :<c-u>CocList files<cr>
     nnoremap          <leader>fg :<c-u>CocList grep<cr>
     nnoremap          <leader>fw :<c-u>CocList words<cr>
-    nnoremap          <leader>fh :<c-u>FilesHidden<cr>
     nnoremap <silent> <leader>w  :<c-u>update<cr>
     nnoremap          <leader>fW :<c-u>w !sudo tee % >/dev/null<cr>
   " }}
@@ -287,49 +286,60 @@
         \ ]
 
     " qf - quick fix
-    nmap <leader> qf <Plug>(coc-fix-current)
+    nmap <leader>qf <Plug>(coc-fix-current)
 
     " cr - rename the current word in the cursor
-    nmap <leader> cr <Plug>(coc-rename)
+    nmap <leader>cr <Plug>(coc-rename)
 
     " co - Open link
-    nmap <leader> co <Plug>(coc-openlink)
+    nmap <leader>co <Plug>(coc-openlink)
 
     " gi - go to implementation
-    nmap <leader> gi <Plug>(coc-implementation) 
+    nmap <leader>gi <Plug>(coc-implementation) 
 
     " gr - find references
-    nmap <leader> gr <Plug>(coc-references)
+    nmap <leader>gr <Plug>(coc-references)
 
     " co - show outline list
-    nmap <leader> co :<C-u>CocList outline<cr>
+    nmap <leader>co :<C-u>CocList outline<cr>
 
     " cl - list errors
-    nmap <leader> cl :<C-u>CocList locationlist<cr>
+    nmap <leader>cl :<C-u>CocList locationlist<cr>
 
     " y - show and paste from yank lisrt
-    nmap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
+    nmap <leader>y :<C-u>CocList -A --normal yank<cr>
 
-    " Use `[c` and `]c` for navigate diagnostics
-    nmap <silent> [c <Plug>(coc-diagnostic-prev)
-    nmap <silent> ]c <Plug>(coc-diagnostic-next)
+    " format selected - prettier
+    nmap <leader>f <Plug>(coc-format-selected)
+    vmap <leader>f <Plug>(coc-format-selected)
 
     " Show commands
-    nnoremap <silent> <space>cc  :<C-u>CocList commands<cr>
+    nmap <leader>cc :<C-u>CocList commands<cr>
+
+    " ca - run code actions
+    vmap <leader>ca <Plug>(coc-codeaction-selected)
+    nmap <leader>ca <Plug>(coc-codeaction)
+
+    " Use `[c` and `]c` for navigate diagnostics
+    nmap <silent>[c <Plug>(coc-diagnostic-prev)
+    nmap <silent>]c <Plug>(coc-diagnostic-next)
 
     " Highlight symbol under cursor on CursorHold
     autocmd CursorHold * silent call CocActionAsync('highlight')
 
+    " gh - get hint on whatever's under the cursor
+    nmap <silent> K :call <SID>show_documentation()<CR>
+    nmap <silent> gh :call <SID>show_documentation()<CR>
+    function! s:show_documentation()
+      if &filetype == 'vim'
+        execute 'h '.expand('<cword>')
+      else
+        call CocAction('doHover')
+      endif
+    endfunction
+
     " restart when tsserver gets wonky
-    nnoremap <silent> <leader> cR  :<C-u>CocRestart<CR>
-
-    " format selected
-    nmap <leader> cf  <Plug>(coc-format-selected)
-    vmap <leader> cf  <Plug>(coc-format-selected)
-
-    " run code actions
-    vmap <leader> ca  <Plug>(coc-codeaction-selected)
-    nmap <leader> ca  <Plug>(coc-codeaction)
+    nnoremap <silent> <leader>cR  :<C-u>CocRestart<CR>
 
     " expadn snippets with enter
     inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"

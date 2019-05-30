@@ -1,9 +1,4 @@
 Other Plugins {{{1
-FZF {{{2
-Search files             :FZF …        N
-Git status files         :GFiles …     N
-Commits                  :Commits …    N
-Buffers                  :Buffers …    N
 Sneak {{{2
 Jump forward             s‹c›‹c›      VN
 Jump backward            S‹c›‹c›       N
@@ -35,8 +30,10 @@ Paste from clipboard     \p           VN
 Paste from clipboard     \P           VN
 Search {{{2
 Find file in working dir \ff           N
-Ditto including dotfiles \fh           N
-Find in files (rg)       \fi           N
+Find grep                \fg           N
+Find words               \fw           N
+Find recent file         \fr           N
+Find recent file         \«space»      N
 Find buffers             \bf           N
 Go {{{2
 Go to window number n    \‹n›          N
@@ -81,3 +78,18 @@ Toggle ignore case       \oi           N
 Toggle invisibles        \ol           N
 Toggle line numbers      \on           N
 Toggle rel line numbers  \or           N
+CoC {{{2
+Quick fix                \qf           N
+Code rename              \cr           N
+Code open link           \co           N
+Go to implementation     \cr           N
+Find references          \gr           N
+Show outline             \co           N
+List errors              \co           N
+Show yanks               \y            N
+Format                   \f           VN
+Next error               [c            N
+Prev error               ]c            N
+Show documentation       K             N
+Code Action              \ca          VN
+Restart CoC              \cR           N
