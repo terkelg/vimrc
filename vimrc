@@ -30,9 +30,8 @@
   Plug 'lifepillar/vim-cheat40'                " Cheat sheet for Vim
   Plug 'tpope/vim-commentary'                  " Add comments in blocks
   Plug 'tpope/vim-surround'                    " Enable inserting brackets around words
-  Plug 'tpope/vim-sleuth'                      " Automatically adjusts 'shiftwidth' and 'expandtab'
+  " Plug 'tpope/vim-sleuth'                      " Automatically adjusts 'shiftwidth' and 'expandtab'
   Plug 'justinmk/vim-sneak'                    " Jump to any location specified by two characters
-  " Plug 'airblade/vim-gitgutter'                " Show git status in the sidebar
   Plug 'unblevable/quick-scope'                " Highlight characters to target for f, F
   Plug 'can3p/incbool.vim'                     " Increment not only numbers but also true/false, show/hide etc.
   Plug 'editorconfig/editorconfig-vim'         " Respect editorconfig files
@@ -41,9 +40,6 @@
   Plug 'sheerun/vim-polyglot'                  " Syntax highlighting for more languages
   Plug 'rakr/vim-one'                          " Another nice theme
   Plug 'junegunn/vim-peekaboo'                 " See the contents of registers
-
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fuzzy finder <3
-  Plug 'junegunn/fzf.vim'
 
   Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
   call plug#end()
@@ -228,12 +224,12 @@
     nnoremap <silent> [b :<c-u><c-r>=v:count1<cr>bp<cr>
   " }}
   " Files: f {{
-    nnoremap          <leader>ff :<c-u>Files<cr>
-    nnoremap          <leader><space> :<c-u>Files<cr>
+    nnoremap          <leader><space> :<c-u>CocList mru<cr>
+    nnoremap          <leader>fr :<c-u>CocList mru<cr>
+    nnoremap          <leader>ff :<c-u>CocList files<cr>
+    nnoremap          <leader>fg :<c-u>CocList grep<cr>
+    nnoremap          <leader>fw :<c-u>CocList words<cr>
     nnoremap          <leader>fh :<c-u>FilesHidden<cr>
-    nnoremap          <leader>fi :<c-u>Rg<cr>
-    nnoremap          <leader>fl :<c-u>Lines<cr>
-    nnoremap <silent> <leader>fw :<c-u>update<cr>
     nnoremap <silent> <leader>w  :<c-u>update<cr>
     nnoremap          <leader>fW :<c-u>w !sudo tee % >/dev/null<cr>
   " }}
@@ -273,7 +269,8 @@
   " }}
   " CoC {{
 
-  let g:coc_global_extensions = [
+    " Plugins
+    let g:coc_global_extensions = [
         \ 'coc-tsserver',
         \ 'coc-css',
         \ 'coc-json',
@@ -283,33 +280,56 @@
         \ 'coc-pairs',
         \ 'coc-git',
         \ 'coc-yank',
+        \ 'coc-lists',
         \ 'coc-snippets',
         \ 'coc-highlight',
         \ 'coc-prettier'
         \ ]
 
-    " Actions
-    nnoremap <leader>q :call CocAction('doQuickfix')<cr>
-    nnoremap <leader>q :call CocAction('doQuickfix')<cr>
-
-    nmap <leader> ac <Plug>(coc-codeaction)
+    " qf - quick fix
     nmap <leader> qf <Plug>(coc-fix-current)
-    nmap <leader> op <Plug>(coc-openlink)
-    nmap <leader> cs :call <SID>show_documentation()<cr>
-    nmap <silent> <leader> gd <Plug>(coc-definition)
-    nmap <silent> <leader> gt <Plug>(coc-type-definition)
-    nmap <silent> <leader> gi <Plug>(coc-implementation)
-    nmap <silent> <leader> re <Plug>(coc-references)
+
+    " cr - rename the current word in the cursor
+    nmap <leader> cr <Plug>(coc-rename)
+
+    " co - Open link
+    nmap <leader> co <Plug>(coc-openlink)
+
+    " gi - go to implementation
+    nmap <leader> gi <Plug>(coc-implementation) 
+
+    " gr - find references
+    nmap <leader> gr <Plug>(coc-references)
+
+    " co - show outline list
+    nmap <leader> co :<C-u>CocList outline<cr>
+
+    " cl - list errors
+    nmap <leader> cl :<C-u>CocList locationlist<cr>
+
+    " y - show and paste from yank lisrt
+    nmap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
 
     " Use `[c` and `]c` for navigate diagnostics
     nmap <silent> [c <Plug>(coc-diagnostic-prev)
     nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
-    " " Show commands
+    " Show commands
     nnoremap <silent> <space>cc  :<C-u>CocList commands<cr>
 
-    " coc-yank 
-    nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+    " Highlight symbol under cursor on CursorHold
+    autocmd CursorHold * silent call CocActionAsync('highlight')
+
+    " restart when tsserver gets wonky
+    nnoremap <silent> <leader> cR  :<C-u>CocRestart<CR>
+
+    " format selected
+    nmap <leader> cf  <Plug>(coc-format-selected)
+    vmap <leader> cf  <Plug>(coc-format-selected)
+
+    " run code actions
+    vmap <leader> ca  <Plug>(coc-codeaction-selected)
+    nmap <leader> ca  <Plug>(coc-codeaction)
 
     " expadn snippets with enter
     inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -324,36 +344,6 @@
       let col = col('.') - 1
       return !col || getline('.')[col - 1]  =~# '\s'
     endfunction
-
-    function! s:show_documentation()
-      if &filetype == 'vim'
-        execute 'h '.expand('<cword>')
-      else
-        call CocAction('doHover')
-      endif
-    endfunction
-
-  " }}
-  " fzf {{
-    " :Files add ! for fullscreen, toggle preview with ?
-    command! -bang -nargs=? -complete=dir Files
-      \ call fzf#vim#files(<q-args>,
-      \   <bang>0 ? fzf#vim#with_preview('up:60%')
-      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-      \   <bang>0)
-
-    " Add support to toggle preview for :Rg aswell
-    command! -bang -nargs=* Rg
-      \ call fzf#vim#grep(
-      \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-      \   <bang>0 ? fzf#vim#with_preview('up:60%')
-      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-      \   <bang>0)
-
-    " Like files, but including hidden files - overwrite default fzf command that don't include hidden files
-    command! -bang -nargs=* -complete=dir FilesHidden call fzf#run(fzf#wrap({
-          \ 'source': 'rg --files --hidden --no-ignore --follow --ignore-case'}, <bang>0))
-
   " }}
 " }}
 " Themes {{
