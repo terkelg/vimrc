@@ -273,7 +273,8 @@
         \ 'coc-git',
         \ 'coc-yank',
         \ 'coc-snippets',
-        \ 'coc-highlight'
+        \ 'coc-highlight',
+        \ 'coc-prettier'
         \ ]
 
     " Actions
