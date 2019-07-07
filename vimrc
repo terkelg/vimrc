@@ -40,6 +40,7 @@
   Plug 'sheerun/vim-polyglot'                  " Syntax highlighting for more languages
   Plug 'rakr/vim-one'                          " Another nice theme
   Plug 'junegunn/vim-peekaboo'                 " See the contents of registers
+  Plug 'evanleck/vim-svelte'                   " Svalte syntax highlight
 
   Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
   call plug#end()
