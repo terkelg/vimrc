@@ -41,8 +41,7 @@
   Plug 'rakr/vim-one'                          " Another nice theme
   Plug 'junegunn/vim-peekaboo'                 " See the contents of registers
   Plug 'evanleck/vim-svelte'                   " Svalte syntax highlight
-
-  Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   call plug#end()
 " }}
 " History and Backup {{
