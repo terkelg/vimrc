@@ -1,8 +1,6 @@
 {
   "javascript.preferences.quoteStyle": "single",
 
-  "coc.preferences.formatOnSaveFiletypes": ["typescript", "javascript", "css"],
-
   "diagnostic.errorSign": "✖",
   "diagnostic.hintSign": "•",
   "diagnostic.infoSign": "•",
