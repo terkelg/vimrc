@@ -1,5 +1,5 @@
 " Modeline and Notes {{
-" vim: set sw=2 ts=2 sts=0 et fmr={{,}} fcs=vert\:| fdm=marker fdt=substitute(getline(v\:foldstart),'\\"\\s\\\|\{\{','','g') nospell:
+" vim: set sw=2 ts=2 sts=0 et fdm=marker :nospell:
 "  __     ___
 "  \ \   / (_)_ __ ___  _ __ ___
 "   \ \ / /| | '_ ` _ \| '__/ __|
@@ -30,7 +30,6 @@
   Plug 'lifepillar/vim-cheat40'                " Cheat sheet for Vim
   Plug 'tpope/vim-commentary'                  " Add comments in blocks
   Plug 'tpope/vim-surround'                    " Enable inserting brackets around words
-  " Plug 'tpope/vim-sleuth'                      " Automatically adjusts 'shiftwidth' and 'expandtab'
   Plug 'justinmk/vim-sneak'                    " Jump to any location specified by two characters
   Plug 'unblevable/quick-scope'                " Highlight characters to target for f, F
   Plug 'can3p/incbool.vim'                     " Increment not only numbers but also true/false, show/hide etc.
@@ -119,6 +118,8 @@
   set diffopt+=vertical " Diff in vertical mode
   set listchars=tab:▸\ ,trail:∙,space:∙,eol:¬,nbsp:▪,precedes:⟨,extends:⟩  " Invisible characters
   let &showbreak='↪ '
+  " Get more information from ctrl-g:
+  nnoremap <c-g> 2<c-g> 
 " }}
 " Statusline {{
   " start of default statusline
@@ -223,12 +224,14 @@
     nnoremap <silent> ]b :<c-u><c-r>=v:count1<cr>bn<cr>
     nnoremap <silent> [b :<c-u><c-r>=v:count1<cr>bp<cr>
   " }}
-  " Files: f {{
+  " Files/Find: f {{
     nnoremap          <leader><space> :<c-u>CocList mru<cr>
     nnoremap          <leader>fr :<c-u>CocList mru<cr>
     nnoremap          <leader>ff :<c-u>CocList files<cr>
+    nnoremap          <leader>fh :<c-u>CocList files --hidden<cr>
     nnoremap          <leader>fg :<c-u>CocList grep<cr>
     nnoremap          <leader>fw :<c-u>CocList words<cr>
+    nnoremap          <leader>fc :<c-u>CocList commits<cr>
     nnoremap <silent> <leader>w  :<c-u>update<cr>
     nnoremap          <leader>fW :<c-u>w !sudo tee % >/dev/null<cr>
   " }}
@@ -306,15 +309,15 @@
     " cl - list errors
     nmap <leader>cl :<C-u>CocList locationlist<cr>
 
+    " cc - list coc commands
+    nmap <leader>cc :<C-u>CocList commands<cr>
+
     " y - show and paste from yank lisrt
     nmap <leader>y :<C-u>CocList -A --normal yank<cr>
 
     " format selected - prettier
     nmap <leader>f <Plug>(coc-format-selected)
     vmap <leader>f <Plug>(coc-format-selected)
-
-    " Show commands
-    nmap <leader>cc :<C-u>CocList commands<cr>
 
     " ca - run code actions
     vmap <leader>ca <Plug>(coc-codeaction-selected)
@@ -323,6 +326,13 @@
     " Use `[c` and `]c` for navigate diagnostics
     nmap <silent>[c <Plug>(coc-diagnostic-prev)
     nmap <silent>]c <Plug>(coc-diagnostic-next)
+
+    " navigate chunks of current buffer
+    nmap <silent>[g <Plug>(coc-git-prevchunk)
+    nmap <silent>]g <Plug>(coc-git-nextchunk)
+
+    " show commit
+    nmap <leader>gs <Plug>(coc-git-chunkinfo)
 
     " Highlight symbol under cursor on CursorHold
     autocmd CursorHold * silent call CocActionAsync('highlight')

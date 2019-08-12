@@ -30,9 +30,11 @@ Paste from clipboard     \p           VN
 Paste from clipboard     \P           VN
 Search {{{2
 Find file in working dir \ff           N
+Find file hidden         \fh           N
 Find grep                \fg           N
 Find words               \fw           N
 Find recent file         \fr           N
+Find Commits             \fc           N
 Find recent file         \«space»      N
 Find buffers             \bf           N
 Go {{{2
@@ -80,16 +82,21 @@ Toggle line numbers      \on           N
 Toggle rel line numbers  \or           N
 CoC {{{2
 Quick fix                \qf           N
-Code rename              \cr           N
-Code open link           \co           N
-Go to implementation     \cr           N
+Rename word              \cr           N
+Open link                \co           N
+Go to implementation     \gi           N
 Find references          \gr           N
-Show outline             \co           N
-List errors              \co           N
-Show yanks               \y            N
+Show outline list        \co           N
+List errors              \cl           N
+List commands            \cc           N
 Format                   \f           VN
+Show yanks               \y            N
 Next error               [c            N
 Prev error               ]c            N
+Next chunk               [g            N
+Prev chunk               ]g            N
+Git chunk info           \gs           N
+Git chunk info           \gs           N
 Show documentation       K             N
 Code Action              \ca          VN
 Restart CoC              \cR           N
