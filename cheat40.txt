@@ -1,9 +1,4 @@
 Other Plugins {{{1
-Sneak {{{2
-Jump forward             s‹c›‹c›      VN
-Jump backward            S‹c›‹c›       N
-Jump forward             z‹c›‹c›       M
-Jump backward            Z‹c›‹c›      VM
 Surround {{{2
 Insert surrounding ‹c›   «C-g»s‹c›     I
 Surround with ‹c›        ys‹Move›‹c›   N
@@ -43,14 +38,6 @@ Go to (tmux) left pane   «Alt-h»       N
 Go to (tmux) right pane  «Alt-l»       N
 Go to (tmux) pane below  «Alt-j»       N
 Go to (tmux) pane above  «Alt-k»       N
-LanguageClient {{{2
-Context Menu             ls            N
-Code Action              la            N
-Hover                    lh            N
-Go to definition         ld            N
-Rename                   lr            N
-Rename item under cursor R             N
-Call hover info          K             N
 NERDTree {{{2
 Toggle NERDTree          \vn           N
 Open in new tab          t             N
@@ -82,20 +69,22 @@ Toggle line numbers      \on           N
 Toggle rel line numbers  \or           N
 CoC {{{2
 Quick fix                \qf           N
-Rename word              \cr           N
+Rename word              \rn           N
 Open link                \co           N
 Go to implementation     \gi           N
+Go to definition         \gd           N
 Find references          \gr           N
 Show outline list        \co           N
 List errors              \cl           N
 List commands            \cc           N
 Format                   \f           VN
+Smart Jump forward       f             N
+Smart Jump backward      F             N
 Show yanks               \y            N
 Next error               [c            N
 Prev error               ]c            N
 Next chunk               [g            N
 Prev chunk               ]g            N
-Git chunk info           \gs           N
 Git chunk info           \gs           N
 Show documentation       K             N
 Code Action              \ca          VN

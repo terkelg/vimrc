@@ -18,7 +18,7 @@
   set hidden " Allow buffer switching without saving
   set timeoutlen=5000
   set ttimeout
-  set ttimeoutlen=10  " This must be a low value for <esc>-key not to be confused with an <a-…> mapping
+  set ttimeoutlen=10 " This must be a low value for <esc>-key not to be confused with an <a-…> mapping
 " }}
 " Install Plugins {{
   if empty(glob('~/.vim/autoload/plug.vim'))
@@ -30,11 +30,8 @@
   Plug 'lifepillar/vim-cheat40'                " Cheat sheet for Vim
   Plug 'tpope/vim-commentary'                  " Add comments in blocks
   Plug 'tpope/vim-surround'                    " Enable inserting brackets around words
-  Plug 'justinmk/vim-sneak'                    " Jump to any location specified by two characters
-  Plug 'unblevable/quick-scope'                " Highlight characters to target for f, F
   Plug 'can3p/incbool.vim'                     " Increment not only numbers but also true/false, show/hide etc.
   Plug 'editorconfig/editorconfig-vim'         " Respect editorconfig files
-  Plug 'moll/vim-node'                         " Enable gf to open node modules
   Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " File browser
   Plug 'sheerun/vim-polyglot'                  " Syntax highlighting for more languages
   Plug 'rakr/vim-one'                          " Another nice theme
@@ -285,20 +282,24 @@
         \ 'coc-lists',
         \ 'coc-snippets',
         \ 'coc-highlight',
-        \ 'coc-prettier'
+        \ 'coc-prettier',
+        \ 'coc-smartf'
         \ ]
 
     " qf - quick fix
     nmap <leader>qf <Plug>(coc-fix-current)
 
     " cr - rename the current word in the cursor
-    nmap <leader>cr <Plug>(coc-rename)
+    nmap <leader>rn <Plug>(coc-rename)
 
     " co - Open link
     nmap <leader>co <Plug>(coc-openlink)
 
     " gi - go to implementation
     nmap <leader>gi <Plug>(coc-implementation) 
+
+    " gd - go to definition
+    nmap <silent>gd <Plug>(coc-definition) 
 
     " gr - find references
     nmap <leader>gr <Plug>(coc-references)
@@ -315,13 +316,16 @@
     " y - show and paste from yank lisrt
     nmap <leader>y :<C-u>CocList -A --normal yank<cr>
 
-    " format selected - prettier
+    " f - format selected - prettier
     nmap <leader>f <Plug>(coc-format-selected)
     vmap <leader>f <Plug>(coc-format-selected)
 
     " ca - run code actions
     vmap <leader>ca <Plug>(coc-codeaction-selected)
     nmap <leader>ca <Plug>(coc-codeaction)
+
+    " gs - show commit
+    nmap <leader>gs <Plug>(coc-git-chunkinfo)
 
     " Use `[c` and `]c` for navigate diagnostics
     nmap <silent>[c <Plug>(coc-diagnostic-prev)
@@ -331,8 +335,16 @@
     nmap <silent>[g <Plug>(coc-git-prevchunk)
     nmap <silent>]g <Plug>(coc-git-nextchunk)
 
-    " show commit
-    nmap <leader>gs <Plug>(coc-git-chunkinfo)
+    " press <esc> to cancel.
+    nmap f <Plug>(coc-smartf-forward)
+    nmap F <Plug>(coc-smartf-backward)
+    nmap ; <Plug>(coc-smartf-repeat)
+    nmap , <Plug>(coc-smartf-repeat-opposite)
+
+    augroup Smartf
+      autocmd User SmartfEnter :hi Conceal ctermfg=220 guifg=#ff38F0
+      autocmd User SmartfLeave :hi Conceal ctermfg=239 guifg=#504945
+    augroup end
 
     " Highlight symbol under cursor on CursorHold
     autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -351,9 +363,8 @@
     " restart when tsserver gets wonky
     nnoremap <silent> <leader>cR  :<C-u>CocRestart<CR>
 
-    " expadn snippets with enter
+    " expand snippets with enter
     inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
     inoremap <silent><expr> <TAB>
           \ pumvisible() ? "\<C-n>" :
           \ <SID>check_back_space() ? "\<TAB>" :
