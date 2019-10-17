@@ -35,6 +35,7 @@
   Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " File browser
   Plug 'sheerun/vim-polyglot'                  " Syntax highlighting for more languages
   Plug 'rakr/vim-one'                          " Another nice theme
+  Plug 'liuchengxu/vim-clap'                   " Interactive 'finder' window
   Plug 'junegunn/vim-peekaboo'                 " See the contents of registers
   Plug 'evanleck/vim-svelte'                   " Svalte syntax highlight
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -222,13 +223,6 @@
     nnoremap <silent> [b :<c-u><c-r>=v:count1<cr>bp<cr>
   " }}
   " Files/Find: f {{
-    nnoremap          <leader><space> :<c-u>CocList mru<cr>
-    nnoremap          <leader>fr :<c-u>CocList mru<cr>
-    nnoremap          <leader>ff :<c-u>CocList files<cr>
-    nnoremap          <leader>fh :<c-u>CocList files --hidden<cr>
-    nnoremap          <leader>fg :<c-u>CocList grep<cr>
-    nnoremap          <leader>fw :<c-u>CocList words<cr>
-    nnoremap          <leader>fc :<c-u>CocList commits<cr>
     nnoremap <silent> <leader>w  :<c-u>update<cr>
     nnoremap          <leader>fW :<c-u>w !sudo tee % >/dev/null<cr>
   " }}
@@ -265,6 +259,14 @@
     nnoremap <silent> <leader>vn :NERDTreeToggle<CR>
     " close vim if the only window left open is a NERDTree<Paste>
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+  " }}
+  " Clap {{
+    nnoremap          <leader><space> :<c-u>Clap files<cr>
+    nnoremap          <leader>ff :<c-u>Clap files<cr>
+    nnoremap          <leader>fg :<c-u>Clap grep<cr>
+    nnoremap          <leader>fi :<c-u>Clap gfiles<cr>
+    nnoremap          <leader>fl :<c-u>Clap lines<cr>
+    nnoremap          <leader>fc :<c-u>Clap commits<cr>
   " }}
   " CoC {{
 
@@ -340,6 +342,9 @@
     nmap F <Plug>(coc-smartf-backward)
     nmap ; <Plug>(coc-smartf-repeat)
     nmap , <Plug>(coc-smartf-repeat-opposite)
+
+    " Find hidden files.
+    nnoremap          <leader>fh :<c-u>CocList files --hidden<cr>
 
     augroup Smartf
       autocmd User SmartfEnter :hi Conceal ctermfg=220 guifg=#ff38F0
