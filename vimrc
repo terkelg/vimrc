@@ -35,7 +35,6 @@
   Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " File browser
   Plug 'sheerun/vim-polyglot'                  " Syntax highlighting for more languages
   Plug 'rakr/vim-one'                          " Another nice theme
-  Plug 'liuchengxu/vim-clap'                   " Interactive 'finder' window
   Plug 'junegunn/vim-peekaboo'                 " See the contents of registers
   Plug 'evanleck/vim-svelte'                   " Svalte syntax highlight
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -260,16 +259,7 @@
     " close vim if the only window left open is a NERDTree<Paste>
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
   " }}
-  " Clap {{
-    nnoremap          <leader><space> :<c-u>Clap files<cr>
-    nnoremap          <leader>ff :<c-u>Clap files<cr>
-    nnoremap          <leader>fg :<c-u>Clap grep<cr>
-    nnoremap          <leader>fi :<c-u>Clap gfiles<cr>
-    nnoremap          <leader>fl :<c-u>Clap lines<cr>
-    nnoremap          <leader>fc :<c-u>Clap commits<cr>
-  " }}
   " CoC {{
-
     " Plugins
     let g:coc_global_extensions = [
         \ 'coc-tsserver',
@@ -288,17 +278,44 @@
         \ 'coc-smartf'
         \ ]
 
+    " CocList {{
+      nnoremap          <leader><space> :<c-u>CocList mru<cr>
+      nnoremap          <leader>ff :<c-u>CocList files<cr>
+      nnoremap          <leader>fg :<c-u>CocList grep<cr>
+      nnoremap          <leader>fc :<c-u>CocList commits<cr>
+      nnoremap          <leader>fh :<c-u>CocList files --hidden<cr>
+      nnoremap          <leader>fo :<C-u>CocList outline<cr>
+      nnoremap          <leader>fe :<C-u>CocList locationlist<cr>
+      nnoremap          <leader>fy :<C-u>CocList -A --normal yank<cr>
+    " }}
+
+    " Smartf {{
+      " press <esc> to cancel.
+      nmap f <Plug>(coc-smartf-forward)
+      nmap F <Plug>(coc-smartf-backward)
+      nmap ; <Plug>(coc-smartf-repeat)
+      nmap , <Plug>(coc-smartf-repeat-opposite)
+
+      augroup Smartf
+        autocmd User SmartfEnter :hi Conceal ctermfg=220 guifg=#ff38F0
+        autocmd User SmartfLeave :hi Conceal ctermfg=239 guifg=#504945
+      augroup end
+    " }}
+    
+    " Git {{
+      " gs - show commit
+      nmap <leader>gs <Plug>(coc-git-chunkinfo)
+
+      " navigate chunks of current buffer
+      nmap <silent>[g <Plug>(coc-git-prevchunk)
+      nmap <silent>]g <Plug>(coc-git-nextchunk)
+    " }}
+
     " qf - quick fix
     nmap <leader>qf <Plug>(coc-fix-current)
 
     " cr - rename the current word in the cursor
     nmap <leader>rn <Plug>(coc-rename)
-
-    " co - Open link
-    nmap <leader>co <Plug>(coc-openlink)
-
-    " gi - go to implementation
-    nmap <leader>gi <Plug>(coc-implementation) 
 
     " gd - go to definition
     nmap <silent>gd <Plug>(coc-definition) 
@@ -306,17 +323,11 @@
     " gr - find references
     nmap <leader>gr <Plug>(coc-references)
 
-    " co - show outline list
-    nmap <leader>co :<C-u>CocList outline<cr>
+    " gi - go to implementation
+    nmap <leader>gi <Plug>(coc-implementation) 
 
-    " cl - list errors
-    nmap <leader>cl :<C-u>CocList locationlist<cr>
-
-    " cc - list coc commands
-    nmap <leader>cc :<C-u>CocList commands<cr>
-
-    " y - show and paste from yank lisrt
-    nmap <leader>y :<C-u>CocList -A --normal yank<cr>
+    " co - Open link
+    nmap <leader>co <Plug>(coc-openlink)
 
     " f - format selected - prettier
     nmap <leader>f <Plug>(coc-format-selected)
@@ -326,30 +337,12 @@
     vmap <leader>ca <Plug>(coc-codeaction-selected)
     nmap <leader>ca <Plug>(coc-codeaction)
 
-    " gs - show commit
-    nmap <leader>gs <Plug>(coc-git-chunkinfo)
+    " restart when tsserver gets wonky
+    nnoremap <silent> <leader>cR  :<C-u>CocRestart<CR>
 
     " Use `[c` and `]c` for navigate diagnostics
     nmap <silent>[c <Plug>(coc-diagnostic-prev)
     nmap <silent>]c <Plug>(coc-diagnostic-next)
-
-    " navigate chunks of current buffer
-    nmap <silent>[g <Plug>(coc-git-prevchunk)
-    nmap <silent>]g <Plug>(coc-git-nextchunk)
-
-    " press <esc> to cancel.
-    nmap f <Plug>(coc-smartf-forward)
-    nmap F <Plug>(coc-smartf-backward)
-    nmap ; <Plug>(coc-smartf-repeat)
-    nmap , <Plug>(coc-smartf-repeat-opposite)
-
-    " Find hidden files.
-    nnoremap          <leader>fh :<c-u>CocList files --hidden<cr>
-
-    augroup Smartf
-      autocmd User SmartfEnter :hi Conceal ctermfg=220 guifg=#ff38F0
-      autocmd User SmartfLeave :hi Conceal ctermfg=239 guifg=#504945
-    augroup end
 
     " Highlight symbol under cursor on CursorHold
     autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -364,9 +357,6 @@
         call CocAction('doHover')
       endif
     endfunction
-
-    " restart when tsserver gets wonky
-    nnoremap <silent> <leader>cR  :<C-u>CocRestart<CR>
 
     " expand snippets with enter
     inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
