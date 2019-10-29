@@ -5,5 +5,5 @@
   "diagnostic.hintSign": "•",
   "diagnostic.infoSign": "•",
 
-  "git.addGlameToBufferVar": true
+  "git.addGBlameToVirtualText": true
 }
