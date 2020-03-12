@@ -7,6 +7,7 @@
 "     \_/  |_|_| |_| |_|_|  \___|
 "
 " }}
+  
 " Environment {{
   set encoding=utf-8 " utf8 everywhere
   set updatetime=500 " Trigger CursorHold event after half a second
@@ -19,6 +20,8 @@
   set timeoutlen=5000
   set ttimeout
   set ttimeoutlen=10 " This must be a low value for <esc>-key not to be confused with an <a-…> mapping
+  set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+  set list
 " }}
 " Install Plugins {{
   if empty(glob('~/.vim/autoload/plug.vim'))
@@ -38,6 +41,7 @@
   Plug 'junegunn/vim-peekaboo'                 " See the contents of registers
   Plug 'evanleck/vim-svelte'                   " Svalte syntax highlight
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
   call plug#end()
 " }}
 " History and Backup {{
@@ -244,15 +248,11 @@
     let g:loaded_vimballPlugin = 1
     let g:loaded_zipPlugin = 1
   " }}
-  " Sneak {{
-    let g:sneak#label = 1
-    let g:sneak#use_ic_scs = 1 " Match according to ignorecase and smartcase
-  " }}
-  " Vim-javascript {{
-    let g:javascript_plugin_jsdoc = 1
-  " }}
-  " Quick-scope {{
-    nnoremap <silent> <leader>oq :<c-u>QuickScopeToggle<cr>
+  " Clap {{
+    nnoremap <leader><space> :<c-u>Clap<cr>
+    nnoremap <leader>ff :<c-u>Clap files<cr>
+    nnoremap <leader>fh :<c-u>Clap files --hidden<cr>
+    nnoremap <leader>fg :<c-u>Clap grep<cr>
   " }}
   " Nerdtree {{
     nnoremap <silent> <leader>vn :NERDTreeToggle<CR>
@@ -279,14 +279,13 @@
         \ ]
 
     " CocList {{
-      nnoremap          <leader><space> :<c-u>CocList mru<cr>
-      nnoremap          <leader>ff :<c-u>CocList files<cr>
-      nnoremap          <leader>fg :<c-u>CocList grep<cr>
-      nnoremap          <leader>fc :<c-u>CocList commits<cr>
-      nnoremap          <leader>fh :<c-u>CocList files --hidden<cr>
-      nnoremap          <leader>fo :<C-u>CocList outline<cr>
-      nnoremap          <leader>fe :<C-u>CocList locationlist<cr>
-      nnoremap          <leader>fy :<C-u>CocList -A --normal yank<cr>
+      " nnoremap <leader>ff :<c-u>CocList files<cr>
+      " nnoremap <leader>fg :<c-u>CocList grep<cr>
+      nnoremap <leader>fc :<c-u>CocList commits<cr>
+      " nnoremap <leader>fh :<c-u>CocList files --hidden<cr>
+      nnoremap <leader>fo :<C-u>CocList outline<cr>
+      nnoremap <leader>fe :<C-u>CocList locationlist<cr>
+      nnoremap <leader>fy :<C-u>CocList -A --normal yank<cr>
     " }}
 
     " Smartf {{
