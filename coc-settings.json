@@ -1,6 +1,7 @@
 {
+  "coc.preferences.formatOnSaveFiletypes": ["css", "json", "javascript", "typescript"],
   "javascript.preferences.quoteStyle": "single",
   "diagnostic.errorSign": "✖",
   "diagnostic.hintSign": "•",
-  "diagnostic.infoSign": "•",
+  "diagnostic.infoSign": "•"
 }

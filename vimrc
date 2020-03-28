@@ -33,6 +33,7 @@
   Plug 'lifepillar/vim-cheat40'                " Cheat sheet for Vim
   Plug 'tpope/vim-commentary'                  " Add comments in blocks
   Plug 'tpope/vim-surround'                    " Enable inserting brackets around words
+  Plug 'tpope/vim-repeat'                      " Enable . repeat for vim surround and others
   Plug 'can3p/incbool.vim'                     " Increment not only numbers but also true/false, show/hide etc.
   Plug 'editorconfig/editorconfig-vim'         " Respect editorconfig files
   Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " File browser
