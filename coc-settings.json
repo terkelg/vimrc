@@ -1,5 +1,5 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["css", "json", "javascript", "typescript"],
+  "coc.preferences.formatOnSaveFiletypes": ["css", "json"],
   "javascript.preferences.quoteStyle": "single",
   "diagnostic.errorSign": "✖",
   "diagnostic.hintSign": "•",
