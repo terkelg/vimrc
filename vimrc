@@ -40,8 +40,9 @@
   Plug 'sheerun/vim-polyglot'                  " Syntax highlighting for more languages
   Plug 'rakr/vim-one'                          " Another nice theme
   Plug 'evanleck/vim-svelte'                   " Svalte syntax highlight
+  Plug 'vimwiki/vimwiki'                       " Personal wiki
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
+  Plug 'liuchengxu/vim-clap', {'do': ':Clap install-binary'}
   call plug#end()
 " }}
 " History and Backup {{
@@ -87,6 +88,7 @@
   set textwidth=80 " Show gutter at 80 chars
 " }}
 " Find, replace, and completion {{
+  " set spell spelllang=en_us " spell check
   set incsearch " Search as you type
   set nohlsearch " Don't keep search highlight after search
   set ignorecase " Case-insensitive search by default
@@ -97,7 +99,7 @@
   set completeopt=noinsert,menuone,noselect
   set shortmess+=c " suppress the 'match x of y', 'The only match' and 'Pattern not found' messages
   " Files and directories to ignore
-  set wildignore+=.DS_Store,Icon\?,*.dmg,*.git,*.pyc,*.o,*.obj,*.so,*.swp,*.zip
+  set wildignore+=.DS_Store,Icon\?,*.dmg,*.git,*.pyc,*.o,*.obj,*.so,*.swp,*.zip,*.jpg,*.png,*.gif
   set wildmenu " Show possible matches when autocompleting
   set wildignorecase " Ignore case when completing file names and directories
 " }}
