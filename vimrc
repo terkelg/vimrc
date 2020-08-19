@@ -39,7 +39,7 @@
   Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " File browser
   Plug 'sheerun/vim-polyglot'                  " Syntax highlighting for more languages
   Plug 'rakr/vim-one'                          " Another nice theme
-  Plug 'evanleck/vim-svelte'                   " Svalte syntax highlight
+  Plug 'evanleck/vim-svelte', {'branch': 'main'} " Svalte syntax highlight
   Plug 'vimwiki/vimwiki'                       " Personal wiki
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'liuchengxu/vim-clap', {'do': ':Clap install-binary'}
