@@ -40,7 +40,7 @@
   Plug 'sheerun/vim-polyglot'                  " Syntax highlighting for more languages
   Plug 'rakr/vim-one'                          " Another nice theme
   Plug 'evanleck/vim-svelte', {'branch': 'main'} " Svalte syntax highlight
-  Plug 'vimwiki/vimwiki'                       " Personal wiki
+  Plug 'petrbroz/vim-glsl'                     " Shader GLSL highlighting
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'liuchengxu/vim-clap', {'do': ':Clap install-binary'}
   call plug#end()
