@@ -3,8 +3,4 @@
 /plugged
 /autoload/plug.vim
 sessions
-
-# exclude everything
-# exception to the rule
-tmp/**/*
-!tmp/**/*.gitkeep
+/tmp/**
