@@ -1,7 +1,17 @@
 {
   "coc.preferences.formatOnSaveFiletypes": ["css", "json"],
+
   "javascript.preferences.quoteStyle": "single",
+
   "diagnostic.errorSign": "✖",
   "diagnostic.hintSign": "•",
-  "diagnostic.infoSign": "•"
+  "diagnostic.infoSign": "•",
+
+  "list.source.files.defaultOptions": ["--auto-preview"],
+  "list.source.outline.defaultOptions": ["--auto-preview"],
+
+  "snippets.extends": {
+    "typescript": ["javascript"],
+    "svelte": ["javascript", "typescript", "html", "css"]
+  }
 }

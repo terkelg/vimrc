@@ -3,18 +3,17 @@
 > My sweet sweet vim configuration
 
 - Foldable and thoroughly commented `vimrc`.
-- Put your customizations into `vimrc_local`.
 - Move freely between Vim and tmux using `⌥-h/j/k/l`
   (plugin-free, requires [some configuration](https://github.com/lifepillar/dotfiles/blob/master/dot-tmux.conf) in tmux, too).
 - 40-column **cheat sheet** always two keys away (courtesy of [Cheat40](https://github.com/lifepillar/vim-cheat40)).
 
 ### Requirements
 
-- A fairly recent Vim (7.4 or later) (`brew install vim` recommended on macOS).
+- A fairly recent Vim (8 or later) (`brew install vim` recommended on macOS).
 
 Recommended:
 
-- Vim 8.
+- Neovim.
 - [fzf](https://github.com/junegunn/fzf) (only the executable);
 - [ripgrep](https://github.com/BurntSushi/ripgrep).
 
