@@ -6,5 +6,5 @@ sessions
 
 # exclude everything
 # exception to the rule
-/tmp/*
-!tmp/**/*/.gitkeep
+tmp/**/*
+!tmp/**/*.gitkeep
