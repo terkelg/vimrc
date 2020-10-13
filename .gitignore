@@ -10,4 +10,5 @@
 /pack/themes
 /autoload/plug.vim
 /plugged
+/tmp
 sessions
