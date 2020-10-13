@@ -1,8 +1,10 @@
 .DS_Store
 /*~
-/vimrc_local
-/pack/bundle
-/pack/themes
-/autoload/plug.vim
 /plugged
+/autoload/plug.vim
 sessions
+
+# exclude everything
+# exception to the rule
+/tmp/*
+!tmp/**/*/.gitkeep
