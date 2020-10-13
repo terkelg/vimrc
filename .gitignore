@@ -1,14 +1,8 @@
 .DS_Store
 /*~
-/init.vim
-/spell
-/tags
-/view
-/viminfo
 /vimrc_local
 /pack/bundle
 /pack/themes
 /autoload/plug.vim
 /plugged
-/tmp
 sessions

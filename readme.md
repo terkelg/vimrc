@@ -20,11 +20,7 @@ Recommended:
 ### Installation
 
 ```sh
-    cd ~
-    git clone https://github.com/terkelg/vimrc.git .vim
-    cd .vim
-    # install Pug
-    ./install.sh
+    git clone https://github.com/terkelg/vimrc.git ~/.vim
 ```
 
 ### Credit
