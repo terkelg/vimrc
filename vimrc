@@ -35,6 +35,7 @@
   Plug 'petrbroz/vim-glsl'                     " Shader GLSL highlighting
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'liuchengxu/vim-clap', {'do': ':Clap install-binary'}
+  Plug 'mattn/emmet-vim'                       " Fast HTML writing
   call plug#end()
 " }}
 
