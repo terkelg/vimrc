@@ -91,8 +91,6 @@ endif
   set textwidth=80 " Show gutter at 80 chars
 " }}
 
-" Test test Test
-
 " Find, replace, and completion {{
   set incsearch " Search as you type
   set nohlsearch " Don't keep search highlight after search
@@ -180,6 +178,7 @@ map <space> <leader>
     " Clap {{
     nnoremap <leader><space> :<c-u>Clap<cr>
     nnoremap <leader>ff :<c-u>Clap files<cr>
+    nnoremap <leader>fb :<c-u>Clap buffers<cr>
     nnoremap <leader>fh :<c-u>Clap files --hidden<cr>
     nnoremap <leader>fg :<c-u>Clap grep<cr>
     " }}
