@@ -31,7 +31,8 @@
   Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " File browser
   Plug 'sheerun/vim-polyglot'                  " Syntax highlighting for more languages
   Plug 'rakr/vim-one'                          " A nice theme
-  Plug 'evanleck/vim-svelte', {'branch': 'main'} " Svalte syntax highlight
+  Plug 'arcticicestudio/nord-vim'              " Another nice theme
+  Plug 'evanleck/vim-svelte', {'branch': 'main'} " Svelte syntax highlight
   Plug 'petrbroz/vim-glsl'                     " Shader GLSL highlighting
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'liuchengxu/vim-clap', {'do': ':Clap install-binary'}
@@ -68,10 +69,14 @@ endif
 " }}
 
 " Apperance {{
-  colorscheme one "set colorscheme
+  colorscheme nord " set colorscheme
   set background=dark
   set shortmess+=Im " No intro, use [+] instead of [Modified]
   let g:one_allow_italics=1 "allow italics
+  let g:nord_bold = 1
+  let g:nord_italic = 1
+  let g:nord_italic_comments = 1
+  let g:nord_underline = 1
 " }}
 
 " Editing {{
