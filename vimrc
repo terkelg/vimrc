@@ -34,9 +34,9 @@
   Plug 'arcticicestudio/nord-vim'              " Another nice theme
   Plug 'evanleck/vim-svelte', {'branch': 'main'} " Svelte syntax highlight
   Plug 'petrbroz/vim-glsl'                     " Shader GLSL highlighting
+  Plug 'neoclide/jsonc.vim'                    " Syntax highlight tsconfig.json and other jsonc docs
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'liuchengxu/vim-clap', {'do': ':Clap install-binary'}
-  Plug 'mattn/emmet-vim'                       " Fast HTML writing
   call plug#end()
 " }}
 
@@ -179,6 +179,9 @@ map <space> <leader>
   nmap ˚ <a-k>
 " }}
 
+" tsconfig.json is actually jsonc, help TypeScript set the correct filetype
+autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc
+
 " Plugins {{
     " Clap {{
     nnoremap <leader><space> :<c-u>Clap<cr>
@@ -205,6 +208,7 @@ map <space> <leader>
             \ 'coc-css',
             \ 'coc-json',
             \ 'coc-html',
+            \ 'coc-emmet',
             \ 'coc-dictionary',
             \ 'coc-omni',
             \ 'coc-pairs',
