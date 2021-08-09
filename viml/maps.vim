@@ -159,11 +159,12 @@ nnoremap <silent><leader>/ :Commentary<CR>
 vnoremap <silent><leader>/ :Commentary<CR>
 
 function! ToggleNvimTree()
+  " https://github.com/kyazdani42/nvim-tree.lua/issues/547
+  let g:nvim_tree_auto_close = 1
   if exists(":NvimTreeToggle") == 0
     " lazy load nvim-tree
     silent! packadd nvim-tree.lua
   endif
-
   NvimTreeToggle
 endfunction
 
