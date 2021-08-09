@@ -177,3 +177,14 @@ nnoremap <silent> <leader>lg :LazyGit<CR>
 " cmap <expr> <Tab> wilder#in_context() ? wilder#next() : "\<Tab>"
 " Wilder iterate through results
 " cmap <expr> <S-Tab> wilder#in_context() ? wilder#previous() : "\<S-Tab>"
+
+function! ToggleZenMode()
+  if exists(":ZenMode") == 0
+    " lazy load nvim-tree
+    silent! packadd zen-mode.nvim
+  endif
+  :lua require("zen-mode").toggle()
+endfunction
+
+" Call zen-mode lazy load function
+nnoremap <silent> <leader>zm :call ToggleZenMode()<CR>
