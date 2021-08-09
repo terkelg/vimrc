@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# Install vim plugin manager
+git clone --depth=1 https://github.com/savq/paq-nvim.git \
+    "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/paqs/start/paq-nvim
+
+# install language servers
+npm install -g bash-language-server
+npm install -g vscode-css-languageserver-bin
+npm install -g vscode-html-languageserver-bin
+npm install -g vscode-json-languageserver
+npm install -g typescript typescript-language-server
+npm install -g vim-language-server
+
+echo "Run `nvim +PaqInstall` to finish setup"
