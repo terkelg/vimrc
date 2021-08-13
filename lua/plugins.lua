@@ -35,7 +35,7 @@ require "paq" {
     "tpope/vim-commentary";
     "tpope/vim-surround";
     "tpope/vim-repeat";
-    { "kdheepak/lazygit.nvim", opt=true};
+    "kdheepak/lazygit.nvim";
     "yuttie/comfortable-motion.vim"; -- TBD
     "mhartington/formatter.nvim";
     -- "folke/twilight.nvim"; -- TBD
