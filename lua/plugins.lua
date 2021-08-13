@@ -35,13 +35,18 @@ require "paq" {
     "tpope/vim-commentary";
     "tpope/vim-surround";
     "tpope/vim-repeat";
+
+    -- Git
     "kdheepak/lazygit.nvim";
+
     "yuttie/comfortable-motion.vim"; -- TBD
     "mhartington/formatter.nvim";
     -- "folke/twilight.nvim"; -- TBD
     -- "gelguy/wilder.nvim";
     { "folke/zen-mode.nvim", opt=true }; -- TBD (Same as toggle window?)
     "ray-x/lsp_signature.nvim";
+
+
     -- "creativenull/diagnosticls-nvim";
     -- {"folke/lua-dev.nvim", opt = true};
 }
