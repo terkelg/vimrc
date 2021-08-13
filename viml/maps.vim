@@ -156,21 +156,13 @@ nnoremap <silent> gD <cmd>lua vim.lsp.buf.definition()<CR>
 
 " Toggle error menu
 nnoremap <silent><leader>h :TroubleToggle<CR>
-" Show symbols outline
-nnoremap <silent><leader>so :SymbolsOutline<CR>
 " Show blame for line
 nnoremap <silent><leader>bb :Gitsigns toggle_current_line_blame<CR>
-
-" Toggle comment for line
-nnoremap <silent><leader>/ :Commentary<CR>
-" Toggle comment for selections
-vnoremap <silent><leader>/ :Commentary<CR>
 
 function! ToggleNvimTree()
   " https://github.com/kyazdani42/nvim-tree.lua/issues/547
   let g:nvim_tree_auto_close = 1
   if exists(":NvimTreeToggle") == 0
-    " lazy load nvim-tree
     silent! packadd nvim-tree.lua
   endif
   NvimTreeToggle
@@ -179,21 +171,29 @@ endfunction
 " Call nvim-tree lazy load function
 nnoremap <silent> <leader>nn :call ToggleNvimTree()<CR>
 
-"Open lazgit
-nnoremap <silent> <leader>lg :LazyGit<CR>
+" Toggle Twilight
+function! ToggleTwilight()
+  if exists(":Twilight") == 0
+    silent! packadd twilight.nvim
+  endif
+  :lua require("twilight").toggle()
+endfunction
+nnoremap <silent> <leader>zf :call ToggleTwilight()<CR>
 
-" Wilder Search
-" cmap <expr> <Tab> wilder#in_context() ? wilder#next() : "\<Tab>"
-" Wilder iterate through results
-" cmap <expr> <S-Tab> wilder#in_context() ? wilder#previous() : "\<S-Tab>"
-
+" Toggle zen-mode
 function! ToggleZenMode()
   if exists(":ZenMode") == 0
-    " lazy load nvim-tree
     silent! packadd zen-mode.nvim
   endif
   :lua require("zen-mode").toggle()
 endfunction
-
-" Call zen-mode lazy load function
 nnoremap <silent> <leader>zm :call ToggleZenMode()<CR>
+
+" Open LazyGit
+function! ToggleLazyGit()
+  if exists(":LazyGit") == 0
+    silent! packadd Lazygit.nvim
+  endif
+  LazyGit
+endfunction
+nnoremap <silent> <leader>lg :call ToggleLazyGit()<CR>

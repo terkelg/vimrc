@@ -1,15 +1,9 @@
 local vim = vim
 local g = vim.g
 
--- line-numbers must be declared before dashboard
--- init because otherwise dashboard shows line numbers
-vim.opt.nu = true
-vim.opt.rnu = true
-
 -- load plugins
 require("plugins")
--- load dashboard
-require("plugins.dashboard-config")
+
 -- autocomplete configuration
 require("plugins.compe-config")
 -- langauge server configuration

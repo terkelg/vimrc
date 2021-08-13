@@ -2,8 +2,10 @@ local vim = vim
 local g = vim.g
 local opt = vim.opt
 
-g.mapleader = ' '
+g.mapleader = " "
 
+opt.nu = true
+opt.rnu = true
 opt.ruler = false
 opt.hidden = true
 opt.ignorecase = true
