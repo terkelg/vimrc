@@ -1,3 +1,5 @@
+" Go to the beginning of the line in insert mode
+inoremap <silent><C-a> <C-o>0
 " Go to the ending of the line in insert mode
 inoremap <silent><C-b> <C-o>$
 " Paste from the system clipboard(in normal mode)
@@ -96,7 +98,13 @@ nnoremap <silent><leader>fg :Telescope git_status<CR>
 " Fuzzy old-files finder
 nnoremap <silent><leader>fo :Telescope oldfiles<CR>
 " Fuzzy file browser
-nnoremap <silent><leader>fe <cmd>lua require('telescope.builtin').file_browser({ initial_mode = "normal" })<CR>
+nnoremap <silent><leader>fe :Telescope file_browser<CR>
+" Fuzzy Todos
+nnoremap <silent><leader>ft :TodoTelescope<CR>
+" Fuzzy LSP
+nnoremap <silent><leader>fa :Telescope lsp_code_actions<CR>
+nnoremap <silent><leader>fd :Telescope lsp_definitions<CR>
+nnoremap <silent><leader>fa :Telescope lsp_code_actions<CR>
 
 " Open floating terminal
 nnoremap <leader>to :lua require('lspsaga.floaterm').open_float_terminal()<CR>
