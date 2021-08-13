@@ -27,7 +27,6 @@ nnoremap <silent> <C-C> :if (&hlsearch == 1) \| set nohlsearch \| else \| set hl
 " Do not make Q go to ex-mode
 nnoremap Q <Nop>
 
-
 " These are all terminal shorthands
 " I've made them to recognize common typos
 cnoreabbrev wq w<bar>bd
@@ -41,16 +40,17 @@ cnoreabbrev W w
 cnoreabbrev Q q
 cnoreabbrev B buffer
 
-" Change buffer sizes 
-"
-" Make uffer narrower
-nnoremap <silent> <C-H> :vertical resize -4<CR>
-" Make buffer wider
-nnoremap <silent> <C-L> :vertical resize +4><CR>
-" Make buffer shorter
-nnoremap <silent> <C-J> :resize -4<CR>
-" Make buffer longer
-nnoremap <silent> <C-K> :resize +4<CR>
+" Faster split navigation
+noremap <C-J> <C-W><C-J>
+noremap <C-K> <C-W><C-K>
+noremap <C-L> <C-W><C-L>
+noremap <C-H> <C-W><C-H>   
+
+" Disable arrow movement, resize splits instead
+nnoremap <Up>    :resize -2<CR>
+nnoremap <Down>  :resize +2<CR>
+nnoremap <Left>  :vertical resize -2<CR>
+nnoremap <Right> :vertical resize +2<CR>
 
 " Create/Toggle a terminal to the bottom
 nnoremap <silent><leader>` :call ChooseTerm("term-slider", 1)<CR>
@@ -97,6 +97,8 @@ nnoremap <silent><leader>fi :Telescope live_grep<CR>
 nnoremap <silent><leader>fg :Telescope git_status<CR>
 " Fuzzy old-files finder
 nnoremap <silent><leader>fo :Telescope oldfiles<CR>
+" Fuzzy file browser
+nnoremap <silent><leader>fe :Telescope file_browser<CR>
 
 " Open floating terminal
 nnoremap <leader>to :lua require('lspsaga.floaterm').open_float_terminal()<CR>
