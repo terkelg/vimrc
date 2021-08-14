@@ -28,10 +28,8 @@ require 'paq' {
   { 'folke/zen-mode.nvim', opt = true },
   { 'folke/twilight.nvim', opt = true },
 
-  -- God like packages
-  'tpope/vim-commentary',
+  'terrortylor/nvim-comment',
   'tpope/vim-surround',
-  'tpope/vim-repeat',
 
   -- Git
   { 'kdheepak/lazygit.nvim', opt = true },
