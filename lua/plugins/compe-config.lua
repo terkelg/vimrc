@@ -1,10 +1,10 @@
 local vim = vim
-vim.o.completeopt = "menu,menuone,noselect"
+vim.o.completeopt = 'menu,menuone,noselect'
 
-require("compe").setup({
+require('compe').setup {
   enabled = true,
   autocomplete = true,
-  preselect = "enable",
+  preselect = 'enable',
   throttle_time = 80,
   source_timeout = 200,
   incomplete_delay = 400,
@@ -21,4 +21,4 @@ require("compe").setup({
     spell = true,
     tags = true,
   },
-})
+}
