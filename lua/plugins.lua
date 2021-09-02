@@ -14,9 +14,11 @@ require 'paq' {
   'glepnir/lspsaga.nvim',
   'kabouzeid/nvim-lspinstall',
   'nvim-treesitter/nvim-treesitter',
-  'hrsh7th/nvim-compe',
   'neovim/nvim-lspconfig',
   'hoob3rt/lualine.nvim',
+
+  -- Fast completion
+  'ms-jpq/coq_nvim',
 
   -- Fuzzy find everything
   'nvim-telescope/telescope.nvim',
@@ -57,7 +59,6 @@ require 'paq' {
   'yuttie/comfortable-motion.vim', -- Consider removing
 
   'mhartington/formatter.nvim',
-  'ray-x/lsp_signature.nvim',
 
   -- "gelguy/wilder.nvim";
   -- "creativenull/diagnosticls-nvim";

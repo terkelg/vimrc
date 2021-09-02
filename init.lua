@@ -1,11 +1,10 @@
 local vim = vim
-local g = vim.g
 
 -- load plugins
 require 'plugins'
 
 -- autocomplete configuration
-require 'plugins.compe-config'
+-- require 'plugins.compe-config'
 -- langauge server configuration
 require 'lsp-config'
 -- general configurations

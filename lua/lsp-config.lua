@@ -1,15 +1,19 @@
 local vim = vim
+local coq = require 'coq'
+local lsp = require 'lspconfig'
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 require('lspinstall').setup() -- important
-require('lsp_signature').setup()
+
+coq.settings = {
+  auto_start = true,
+}
 
 local servers = require('lspinstall').installed_servers()
 for _, server in pairs(servers) do
-  require('lspconfig')[server].setup {}
-  require('lsp_signature').on_attach()
+  lsp[server].setup(coq.lsp_ensure_capabilities())
 end
 
 vim.fn.sign_define(
