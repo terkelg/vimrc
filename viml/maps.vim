@@ -18,27 +18,14 @@ nnoremap <silent><leader>p "*p
 nnoremap <silent><leader>a ggVG
 " Delete a buffer
 nnoremap <silent><leader>bd :bd<CR>
-" Escape in terminal mode takes you to normal mode
-tnoremap <silent><leader><Esc> <C-\><C-n>
 " Create a new blank buffer
 nnoremap <leader>gg :enew<CR>
 " Toggle search highlight
 nnoremap <silent> <C-C> :if (&hlsearch == 1) \| set nohlsearch \| else \| set hlsearch \| endif<cr>
 " Do not make Q go to ex-mode
 nnoremap Q <Nop>
-
-" These are all terminal shorthands
-" I've made them to recognize common typos
-cnoreabbrev wq w<bar>bd
-cnoreabbrev Wq w<bar>bd
-cnoreabbrev WQ w<bar>bd
-cnoreabbrev wqa1 wqa!
-cnoreabbrev qa1 qa!
-cnoreabbrev Qa qa
-cnoreabbrev Wqa wqa
-cnoreabbrev W w
-cnoreabbrev Q q
-cnoreabbrev B buffer
+" Pick buffers in bufferline
+nnoremap <silent> gb :BufferLinePick<CR>
 
 " Faster split navigation
 noremap <C-J> <C-W><C-J>
@@ -52,37 +39,20 @@ nnoremap <Down>  :resize -2<CR>
 nnoremap <Left>  :vertical resize -2<CR>
 nnoremap <Right> :vertical resize +2<CR>
 
-" Create/Toggle a terminal to the bottom
-nnoremap <silent><leader>` :call ChooseTerm("term-slider", 1)<CR>
-" Create/Toggle a terminal in a buffer 
-nnoremap <silent><leader><CR> :call ChooseTerm("term-pane", 0)<CR>
-
-" Terminal Toggle
-function! ChooseTerm(termname, slider)
-    let pane = bufwinnr(a:termname)
-    let buf = bufexists(a:termname)
-    if pane > 0
-        " pane is visible
-        if a:slider > 0
-            :exe pane . "wincmd c"
-        else
-            :exe "e #" 
-        endif
-    elseif buf > 0
-        " buffer is not in pane
-        if a:slider
-            :exe "botright split"
-        endif
-        :exe "buffer " . a:termname
-    else
-        " buffer is not loaded, create
-        if a:slider
-            :exe "botright split"
-        endif
-        :terminal
-        :exe "f " a:termname
-    endif
-endfunction
+" Create a floating terminal
+nnoremap <silent><leader>` :ToggleTerm direction=float<CR>
+nnoremap <silent><leader>tt :ToggleTerm<CR>
+nnoremap <silent><leader>th :ToggleTerm direction=horizontal<CR>
+nnoremap <silent><leader>ts :ToggleTerm direction=vertical<CR>
+nnoremap <silent><leader><CR> :ToggleTerm direction=window<CR>
+"
+" Escape in terminal mode takes you to normal mode
+tnoremap <silent><esc> <C-\><C-n>
+" Support same window navigation in terminal
+tnoremap <C-h> <C-\><C-n><C-W>h
+tnoremap <C-j> <C-\><C-n><C-W>j
+tnoremap <C-k> <C-\><C-n><C-W>k
+tnoremap <C-l> <C-\><C-n><C-W>l
 
 " Telescope
 " Fuzzy file finder
@@ -106,11 +76,6 @@ nnoremap <silent><leader>fa :Telescope lsp_code_actions<CR>
 nnoremap <silent><leader>fd :Telescope lsp_definitions<CR>
 nnoremap <silent><leader>fa :Telescope lsp_code_actions<CR>
 
-" Open floating terminal
-nnoremap <leader>to :lua require('lspsaga.floaterm').open_float_terminal()<CR>
-" Close floating terminal
-nnoremap <leader>tc :lua require('lspsaga.floaterm').close_float_terminal()<CR>
-
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
@@ -126,36 +91,38 @@ inoremap <silent><expr> <C-d> compe#scroll({ 'delta': -4 })
 
 " Lspsaga
 " Symobols Finder
-nnoremap <silent> gh <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
+nnoremap <silent>gh <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
 " Show code actions
 nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
 " Show code actions for selection
 vnoremap <silent><leader>ca :<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>
 " Show hovering documentation
-nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
+nnoremap <silent>K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
 " Scroll down in lspsaga menus
 nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
 " Scroll up in lspsaga menus
 nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
 " Show signature help(imo not thaat useful)
-nnoremap <silent> gs <cmd>lua require('lsopsaga.signaturehelp').signature_help()<CR>
+nnoremap <silent>gs <cmd>lua require('lsopsaga.signaturehelp').signature_help()<CR>
 " Rename symbols
 nnoremap <silent>gr <cmd>lua require('lspsaga.rename').rename()<CR>
 " Preview definition
-nnoremap <silent> gd <cmd>lua require'lspsaga.provider'.preview_definition()<CR>
+nnoremap <silent>gd <cmd>lua require'lspsaga.provider'.preview_definition()<CR>
 " Show suggestions/errors/warnings for the line
 nnoremap <silent><leader>cd <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
 nnoremap <silent><leader>cc <cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>
 " Jump to the next diagnostic suggestion
-nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
+nnoremap <silent>]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
 " Jump to the previous diagnostic suggestion
-nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
+nnoremap <silent>[e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
 
 " Jump to definition
 nnoremap <silent> gD <cmd>lua vim.lsp.buf.definition()<CR>
 
 " Toggle error menu
 nnoremap <silent><leader>h :TroubleToggle<CR>
+" Show todo menu
+nnoremap <silent><leader>ht :TodoTrouble<CR>
 " Show blame for line
 nnoremap <silent><leader>bb :Gitsigns toggle_current_line_blame<CR>
 
@@ -170,24 +137,6 @@ endfunction
 
 " Call nvim-tree lazy load function
 nnoremap <silent> <leader>nn :call ToggleNvimTree()<CR>
-
-" Toggle Twilight
-function! ToggleTwilight()
-  if exists(":Twilight") == 0
-    silent! packadd twilight.nvim
-  endif
-  :lua require("twilight").toggle()
-endfunction
-nnoremap <silent> <leader>zf :call ToggleTwilight()<CR>
-
-" Toggle zen-mode
-function! ToggleZenMode()
-  if exists(":ZenMode") == 0
-    silent! packadd zen-mode.nvim
-  endif
-  :lua require("zen-mode").toggle()
-endfunction
-nnoremap <silent> <leader>zm :call ToggleZenMode()<CR>
 
 " Open LazyGit
 function! ToggleLazyGit()

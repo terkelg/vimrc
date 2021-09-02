@@ -39,15 +39,13 @@ require 'paq' {
   -- Highlight todo, warn and hack comments
   'folke/todo-comments.nvim',
 
-  -- Zenmode
-  { 'folke/zen-mode.nvim', opt = true },
-  { 'folke/twilight.nvim', opt = true },
-
-  -- Easy blog commenting
+  -- Easy block commenting
   'terrortylor/nvim-comment',
 
-  -- Faste quoting/parenthesizing 
+  -- Faste quoting/parenthesizing
   'tpope/vim-surround',
+
+  'akinsho/toggleterm.nvim',
 
   -- Git
   { 'kdheepak/lazygit.nvim', opt = true },
@@ -57,7 +55,7 @@ require 'paq' {
 
   -- Smooth scrolling
   'yuttie/comfortable-motion.vim', -- Consider removing
-  
+
   'mhartington/formatter.nvim',
   'ray-x/lsp_signature.nvim',
 
