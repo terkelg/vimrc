@@ -24,14 +24,32 @@ nnoremap <leader>gg :enew<CR>
 nnoremap <silent> <C-C> :if (&hlsearch == 1) \| set nohlsearch \| else \| set hlsearch \| endif<cr>
 " Do not make Q go to ex-mode
 nnoremap Q <Nop>
+" Escape in terminal mode takes you to normal mode
+tnoremap <silent><esc> <C-\><C-n>
+
 " Pick buffers in bufferline
 nnoremap <silent> gb :BufferLinePick<CR>
+nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
+nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
+nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
+nnoremap <silent><leader>4 <Cmd>BufferLineGoToBuffer 4<CR>
+nnoremap <silent><leader>5 <Cmd>BufferLineGoToBuffer 5<CR>
+nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
+nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
+nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
+nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
 
 " Faster split navigation
 noremap <C-J> <C-W><C-J>
 noremap <C-K> <C-W><C-K>
 noremap <C-L> <C-W><C-L>
 noremap <C-H> <C-W><C-H>   
+
+" Support same window navigation in terminal
+tnoremap <C-J> <C-\><C-n><C-W>j
+tnoremap <C-K> <C-\><C-n><C-W>k
+tnoremap <C-L> <C-\><C-n><C-W>l
+tnoremap <C-H> <C-\><C-n><C-W>h
 
 " Disable arrow movement, resize splits instead
 nnoremap <Up>    :resize +2<CR>
@@ -45,14 +63,6 @@ nnoremap <silent><leader>tt :ToggleTerm<CR>
 nnoremap <silent><leader>th :ToggleTerm direction=horizontal<CR>
 nnoremap <silent><leader>ts :ToggleTerm direction=vertical<CR>
 nnoremap <silent><leader><CR> :ToggleTerm direction=window<CR>
-"
-" Escape in terminal mode takes you to normal mode
-tnoremap <silent><esc> <C-\><C-n>
-" Support same window navigation in terminal
-tnoremap <C-h> <C-\><C-n><C-W>h
-tnoremap <C-j> <C-\><C-n><C-W>j
-tnoremap <C-k> <C-\><C-n><C-W>k
-tnoremap <C-l> <C-\><C-n><C-W>l
 
 " Telescope
 " Fuzzy file finder
@@ -136,3 +146,8 @@ function! ToggleLazyGit()
   LazyGit
 endfunction
 nnoremap <silent> <leader>lg :call ToggleLazyGit()<CR>
+
+" Wilder Search
+cmap <expr> <Tab> wilder#in_context() ? wilder#next() : "\<Tab>"
+" Wilder iterate through results
+cmap <expr> <S-Tab> wilder#in_context() ? wilder#previous() : "\<S-Tab>"

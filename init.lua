@@ -3,8 +3,19 @@ local vim = vim
 -- load plugins
 require 'plugins'
 
--- autocomplete configuration
--- require 'plugins.compe-config'
+vim.g.coq_settings = { 
+  auto_start = true, 
+  keymap = {
+    jump_to_mark = "<c-q>",
+  },
+  clients = {
+     tabnine = {
+       enabled = true,
+     },
+   },
+}
+
+
 -- langauge server configuration
 require 'lsp-config'
 -- general configurations

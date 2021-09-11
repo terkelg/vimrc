@@ -17,4 +17,10 @@ require('telescope').setup {
     generic_sorter = require('telescope.sorters').get_generic_fuzzy_sorter,
     set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil
   },
+  extensions = {
+    fzf = {
+      fuzzy = true
+    }
+  }
 }
+require('telescope').load_extension('fzf')
