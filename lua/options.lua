@@ -18,8 +18,9 @@ opt.signcolumn = 'yes'
 opt.cmdheight = 1
 opt.updatetime = 250 -- update interval for gitsigns
 opt.timeoutlen = 400
-opt.expandtab = true
-opt.shiftwidth = 2
+opt.expandtab = false
+opt.shiftwidth = 4
+opt.tabstop = 4
 opt.smartindent = true
 opt.background = 'dark'
 opt.whichwrap:append '<>hl'
@@ -28,6 +29,7 @@ opt.foldmethod = 'manual'
 vim.cmd 'set wildcharm=<Tab>'
 
 vim.cmd 'colorscheme tokyonight'
+g.tokyonight_sidebars = { 'terminal' }
 
 local disabled_built_ins = {
   'netrw',

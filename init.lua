@@ -3,18 +3,12 @@ local vim = vim
 -- load plugins
 require 'plugins'
 
-vim.g.coq_settings = { 
-  auto_start = true, 
+vim.g.coq_settings = {
+  auto_start = 'shut-up',
   keymap = {
-    jump_to_mark = "<c-q>",
+    jump_to_mark = '<c-q>',
   },
-  clients = {
-     tabnine = {
-       enabled = true,
-     },
-   },
 }
-
 
 -- langauge server configuration
 require 'lsp-config'

@@ -19,8 +19,8 @@ require('telescope').setup {
   },
   extensions = {
     fzf = {
-      fuzzy = true
-    }
-  }
+      fuzzy = true,
+    },
+  },
 }
-require('telescope').load_extension('fzf')
+require('telescope').load_extension 'fzf'

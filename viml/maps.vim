@@ -18,26 +18,14 @@ nnoremap <silent><leader>p "*p
 nnoremap <silent><leader>a ggVG
 " Delete a buffer
 nnoremap <silent><leader>bd :bd<CR>
+" Escape in terminal mode takes you to normal mode
+tnoremap <silent><Esc> <C-\><C-n>
 " Create a new blank buffer
 nnoremap <leader>gg :enew<CR>
 " Toggle search highlight
 nnoremap <silent> <C-C> :if (&hlsearch == 1) \| set nohlsearch \| else \| set hlsearch \| endif<cr>
 " Do not make Q go to ex-mode
 nnoremap Q <Nop>
-" Escape in terminal mode takes you to normal mode
-tnoremap <silent><esc> <C-\><C-n>
-
-" Pick buffers in bufferline
-nnoremap <silent> gb :BufferLinePick<CR>
-nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
-nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
-nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
-nnoremap <silent><leader>4 <Cmd>BufferLineGoToBuffer 4<CR>
-nnoremap <silent><leader>5 <Cmd>BufferLineGoToBuffer 5<CR>
-nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
-nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
-nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
-nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
 
 " Faster split navigation
 noremap <C-J> <C-W><C-J>
@@ -57,12 +45,11 @@ nnoremap <Down>  :resize -2<CR>
 nnoremap <Left>  :vertical resize -2<CR>
 nnoremap <Right> :vertical resize +2<CR>
 
-" Create a floating terminal
-nnoremap <silent><leader>` :ToggleTerm direction=float<CR>
-nnoremap <silent><leader>tt :ToggleTerm<CR>
-nnoremap <silent><leader>th :ToggleTerm direction=horizontal<CR>
-nnoremap <silent><leader>ts :ToggleTerm direction=vertical<CR>
-nnoremap <silent><leader><CR> :ToggleTerm direction=window<CR>
+" Call nvim-tree lazy load function
+nnoremap <silent> <leader>nn :call ToggleNvimTree()<CR>
+
+"Open lazygit
+nnoremap <silent> <leader>lg :LazyGit<CR>
 
 " Telescope
 " Fuzzy file finder
@@ -84,38 +71,32 @@ nnoremap <silent><leader>ft :TodoTelescope<CR>
 " Fuzzy LSP
 nnoremap <silent><leader>fa :Telescope lsp_code_actions<CR>
 nnoremap <silent><leader>fd :Telescope lsp_definitions<CR>
-nnoremap <silent><leader>fa :Telescope lsp_code_actions<CR>
 
-inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-" Lspsaga
 " Symobols Finder
-nnoremap <silent>gh <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
+nnoremap <silent> gh <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
 " Show code actions
 nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
 " Show code actions for selection
 vnoremap <silent><leader>ca :<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>
 " Show hovering documentation
-nnoremap <silent>K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
+nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
 " Scroll down in lspsaga menus
 nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
 " Scroll up in lspsaga menus
 nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
 " Show signature help(imo not thaat useful)
-nnoremap <silent>gs <cmd>lua require('lsopsaga.signaturehelp').signature_help()<CR>
+nnoremap <silent> gs <cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>
 " Rename symbols
 nnoremap <silent>gr <cmd>lua require('lspsaga.rename').rename()<CR>
 " Preview definition
-nnoremap <silent>gd <cmd>lua require'lspsaga.provider'.preview_definition()<CR>
+nnoremap <silent> gd <cmd>lua require'lspsaga.provider'.preview_definition()<CR>
 " Show suggestions/errors/warnings for the line
 nnoremap <silent><leader>cd <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
 nnoremap <silent><leader>cc <cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>
 " Jump to the next diagnostic suggestion
-nnoremap <silent>]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
+nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
 " Jump to the previous diagnostic suggestion
-nnoremap <silent>[e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
-
+nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
 " Jump to definition
 nnoremap <silent> gD <cmd>lua vim.lsp.buf.definition()<CR>
 
@@ -125,6 +106,11 @@ nnoremap <silent><leader>h :TroubleToggle<CR>
 nnoremap <silent><leader>ht :TodoTrouble<CR>
 " Show blame for line
 nnoremap <silent><leader>bb :Gitsigns toggle_current_line_blame<CR>
+
+" Wilder Search
+cmap <expr> <Tab> wilder#in_context() ? wilder#next() : "\<Tab>"
+" Wilder iterate through results
+cmap <expr> <S-Tab> wilder#in_context() ? wilder#previous() : "\<S-Tab>"
 
 function! ToggleNvimTree()
   " https://github.com/kyazdani42/nvim-tree.lua/issues/547
@@ -147,7 +133,14 @@ function! ToggleLazyGit()
 endfunction
 nnoremap <silent> <leader>lg :call ToggleLazyGit()<CR>
 
-" Wilder Search
-cmap <expr> <Tab> wilder#in_context() ? wilder#next() : "\<Tab>"
-" Wilder iterate through results
-cmap <expr> <S-Tab> wilder#in_context() ? wilder#previous() : "\<S-Tab>"
+" Pick buffers in bufferline
+nnoremap <silent> gb :BufferLinePick<CR>
+nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
+nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
+nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
+nnoremap <silent><leader>4 <Cmd>BufferLineGoToBuffer 4<CR>
+nnoremap <silent><leader>5 <Cmd>BufferLineGoToBuffer 5<CR>
+nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
+nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
+nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
+nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>

@@ -43,3 +43,52 @@ require('which-key').setup {
   triggers = 'auto', -- automatically setup triggers
   -- triggers = {"<leader>"} -- or specifiy a list manually
 }
+
+require('which-key').register({
+  ['1'] = 'Go to Buffer 1',
+  ['2'] = 'Go to Buffer 2',
+  ['3'] = 'Go to Buffer 3',
+  ['4'] = 'Go to Buffer 4',
+  ['5'] = 'Go to Buffer 5',
+  ['6'] = 'Go to Buffer 6',
+  ['7'] = 'Go to Buffer 7',
+  ['8'] = 'Go to Buffer 8',
+  ['9'] = 'Go to Buffer 9',
+  a = 'Select all',
+  b = {
+    name = '+Buffer',
+    b = 'Show blame for line',
+    d = 'Delete a Buffer',
+  },
+  c = {
+    name = '+Code Action',
+    a = 'Code Actions',
+    c = 'Cursor Diagnostics',
+    d = 'Line Diagnostics',
+  },
+  f = {
+    name = '+Search',
+    f = 'Find File',
+    b = 'Find Buffer',
+    g = 'Find changed File',
+    h = 'Find Help',
+    i = 'Find Text',
+    o = 'Find recent File',
+    e = 'Find browser (explore)',
+    t = 'Find todo',
+    a = 'Find code action',
+    d = 'Find code definition',
+  },
+  g = {
+    name = '+New Buffer',
+    g = 'New Buffer',
+  },
+  h = 'Trouble',
+  l = '+LazyGit',
+  n = {
+    name = '+Explorer',
+    n = 'Explorer',
+  },
+}, {
+  prefix = '<leader>',
+})

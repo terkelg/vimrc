@@ -2,9 +2,15 @@ local vim = vim
 
 -- Auto install paq if needed be
 local fn = vim.fn
-local install_path = fn.stdpath('data') .. '/site/pack/paqs/start/paq-nvim'
+local install_path = fn.stdpath 'data' .. '/site/pack/paqs/start/paq-nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({'git', 'clone', '--depth=1', 'https://github.com/savq/paq-nvim.git', install_path})
+  fn.system {
+    'git',
+    'clone',
+    '--depth=1',
+    'https://github.com/savq/paq-nvim.git',
+    install_path,
+  }
 end
 
 require 'paq' {
@@ -20,19 +26,17 @@ require 'paq' {
 
   -- Lanuage Server
   'glepnir/lspsaga.nvim',
+  'ray-x/lsp_signature.nvim',
   'kabouzeid/nvim-lspinstall',
   'nvim-treesitter/nvim-treesitter',
   'neovim/nvim-lspconfig',
-
-  -- Show function signature
-  'ray-x/lsp_signature.nvim',
 
   -- A nice status line
   'hoob3rt/lualine.nvim',
 
   -- Fuzzy find everything
   'nvim-telescope/telescope.nvim',
-  {'nvim-telescope/telescope-fzf-native.nvim', run='make'},
+  { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
 
   -- Like easymotion, sneak, and hop
   'ggandor/lightspeed.nvim',
@@ -42,6 +46,9 @@ require 'paq' {
 
   -- Theme
   'folke/tokyonight.nvim',
+
+  -- Colorful brackets
+  'p00f/nvim-ts-rainbow',
 
   -- Help my flawed memory
   'folke/which-key.nvim',
@@ -53,12 +60,13 @@ require 'paq' {
   'folke/todo-comments.nvim',
 
   -- Easy block commenting
-  'terrortylor/nvim-comment',
+  'tpope/vim-commentary',
 
   -- Faste quoting/parenthesizing
   'tpope/vim-surround',
 
-  'akinsho/toggleterm.nvim',
+  -- Respect editor config
+  'editorconfig/editorconfig-vim',
 
   -- Git
   { 'kdheepak/lazygit.nvim', opt = true },
@@ -69,19 +77,15 @@ require 'paq' {
   -- Smooth scrolling
   'yuttie/comfortable-motion.vim', -- Consider removing
 
-  'mhartington/formatter.nvim',
-
   -- Fast completion
   { 'ms-jpq/coq_nvim', branch = 'coq' },
+
+  'christoomey/vim-tmux-navigator',
+
+  'gelguy/wilder.nvim',
 
   -- Language Specific
   'evanleck/vim-svelte',
 
-  -- "gelguy/wilder.nvim";
-  -- "creativenull/diagnosticls-nvim";
-  -- "folke/lua-dev.nvim";
-  -- "simrat39/symbols-outline.nvim";
-  -- "glepnir/dashboard-nvim",
-  -- "jiangmiao/auto-pairs", -- Consider removing (Slow!)
   'tweekmonster/startuptime.vim',
 }
