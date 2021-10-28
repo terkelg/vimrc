@@ -47,6 +47,9 @@ require 'paq' {
   -- Theme
   'folke/tokyonight.nvim',
 
+  -- Import Costs
+  { 'yardnsm/vim-import-cost', run = 'npm install'},
+
   -- Colorful brackets
   'p00f/nvim-ts-rainbow',
 

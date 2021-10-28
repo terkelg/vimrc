@@ -28,8 +28,9 @@ opt.pumheight = 20
 opt.foldmethod = 'manual'
 vim.cmd 'set wildcharm=<Tab>'
 
-vim.cmd 'colorscheme tokyonight'
 g.tokyonight_sidebars = { 'terminal' }
+g.tokyonight_style = 'night'
+vim.cmd 'colorscheme tokyonight'
 
 local disabled_built_ins = {
   'netrw',
